@@ -31,7 +31,7 @@ Tools\
 [Device Tree generator](https://rocketboards.org/foswiki/Documentation/DeviceTreeGenerator140)\
 [Altera sopc2dts](https://github.com/altera-opensource/sopc2dts)\
 [LegUp](http://legup.eecg.utoronto.ca/)\
-Automating the Design of Processor/Accelerator Embedded Systems with LegUp High-Level Synthesis(http://legup.eecg.toronto.edu/euc_2014.pdf)
+[Automating the Design of Processor/Accelerator Embedded Systems with LegUp High-Level Synthesis](http://legup.eecg.toronto.edu/euc_2014.pdf)
 
 Source code
 [Altera linux-socfpga](https://github.com/altera-opensource/linux-socfpga) (sadrzi primere drajvera, fpga mgr drajver)\
