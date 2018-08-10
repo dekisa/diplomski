@@ -25,7 +25,7 @@ Courses\
 [Projektovanje digitalnih sistema](http://tnt.etf.bg.ac.rs/~13m041pds/pdf/)\
 [Digitalni VLSI sistemi - MS1DVS](http://tnt.etf.bg.ac.rs/~ms1dvs/)
 
-[#Avalon MM Slave Template](https://www.intel.com/content/www/us/en/programmable/support/support-resources/design-examples/intellectual-property/embedded/nios-ii/exm-avalon-memory-slave.html)
+#[Avalon MM Slave Template](https://www.intel.com/content/www/us/en/programmable/support/support-resources/design-examples/intellectual-property/embedded/nios-ii/exm-avalon-memory-slave.html)
 
 Tools\
 [Device Tree generator](https://rocketboards.org/foswiki/Documentation/DeviceTreeGenerator140)\
