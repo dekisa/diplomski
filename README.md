@@ -3,7 +3,7 @@
 Guides\
 [SoC-FPGA Design Guide [DE1-SoC Edition].pdf](https://moodle.epfl.ch/pluginfile.php/1680499/mod_resource/content/9/SoC-FPGA%20Design%20Guide%20%5BDE1-SoC%20Edition%5D.pdf)\
 [Interfacing Custom IP Cores to HPS/FPGA SOC Platform](https://www.ee.ryerson.ca/~courses/coe838/labs/lab4.pdf)\
-[Embedded Linux system development](https://bootlin.com/doc/training/embedded-linux/embedded-linux-slides.pdf)
+[Embedded Linux system development](https://bootlin.com/doc/training/embedded-linux/embedded-linux-slides.pdf)\
 [Buildroot Training Practical Labs](https://bootlin.com/doc/training/buildroot/buildroot-labs.pdf)\
 [Yocto training](https://bootlin.com/doc/training/yocto/yocto-slides.pdf)
 
