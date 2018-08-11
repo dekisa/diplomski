@@ -40,3 +40,7 @@ Source code
 GPIO API
 https://www.kernel.org/doc/html/v4.15/driver-api/gpio.html \
 https://elixir.bootlin.com/linux/latest/source/include/linux/of_gpio.h
+
+# important
+quartus_cpf -c -o bitstream_compression=on my_input_file.sof my_output_file.rbf
+
