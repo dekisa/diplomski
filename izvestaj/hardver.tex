@@ -1,0 +1,12 @@
+\section{Hardver sistema}
+
+
+Razvojna ploča sistema i mikrokontroler su pojednostavljeno prikazani na slici \ref{slika:hw}. Od hardvera na razvojnoj ploči koristi se potenciometar, LED displej, dugme, jedan Click slot na koji je priključen Bluetooth2 Click. Od periferija mikrokontrolera koriste se AD konvertor \verb+ADC12_A+, univerzalni serijski komunikacioni interfejs \verb+USCI_A0+ i paralelni portovi.\\
+
+Potenciometar je povezan na pin P7.6 koji je konfigurisan za alternativnu funkciju kao ulaz u kanal 14 AD konvertora. AD konvertor \verb+ADC12_A+ je inicijalizovan tako da po upisivanju bita za pokretanje konverzije obavi jednu konverziju.\\
+
+LED displej je povezan pinove prikazane na slici \ref{slika:hw}. Pinovi su konfigurisani kao izlazni. Prisutni su baferi i tranzistori za uključivanje segmenata ali su izostavljeni sa šeme. Za ispravan rad potrebno je multipleksirati displej tako da u svakom trenutku bude uključen samo jedan segment. Nakon kratkog intervala segment se gasi, menjaju se izlazi a-g za sledeću cifru i uključuje se sledeći segment. Ovo se obavlja brzo i stvara iluziju da sve se sve četiri cifre prikazuju bez prekida.
+
+Dugme je povezano na pin P2.7 koji je podešen kao ulazni.\\
+
+Univerzalni serijski komunikacioni interfejs \verb+USCI_A0+ je konfigurisan da se koristi za UART serijsku komunikaciju. Pinovi rx i tx su povezani na Click pločicu.\\

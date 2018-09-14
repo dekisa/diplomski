@@ -1,0 +1,59 @@
+\section{Softver sistema}
+
+Mikrokontroler je programiran tako da ispuni zahteve projekta. Svaka periferija ima svoju biblioteku, tako da ima definisan interfejs. Na blok šemi \ref{slika:sw} je prikazan tok izvršavanja programa.
+
+Na strani računara se koristi operatini sistem Windows 10. Terminalu se pristupa preko aplikacije TeraTerm. Modul WT41 je uparen sa računarom. Na računaru je dostupan virtuelni \verb+COM+ port (Bluetooth Serial Port). Uključenjem napajanja za modul \verb+WT41+ i otvaranjem pomenutog \verb+COM+ porta u terminalu je ostvarena konekcija. Nakon uspostavljane konekcije modul transparentno propušta sve bajtove sa jedne na drugu stranu.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1.05]{sw_block.pdf}
+\caption{Tok izvršavanja programa}
+\label{slika:hw}
+\end{figure}
+
+\subsection{Glavni program}
+U glavnom programu se po pokretanju sistema izvršava inicijalizacija periferija u skladu sa opisom datim u pograljvu Hardver sistema. Nakon toga se u glavnoj petlji izvršavaja aplikacioni kod. Ovaj kod će biti objašnjen nakon pregleda bibilioteka koje enkapsuliraju periferije sistema.
+
+\subsection{gpio}
+Ovaj modul obezbeđuje rad sa dugmićem. Implementiranje susledeće funkcije:\\
+\verb+void gpio_set_flag()+ - postavlja felg za debaunsiranje, pozvati iz prekidne rutine\\
+\verb+void gpio_debounce()+ - obavlja debaunsiranje, potrebno je pozivati iz glavne petlje\\
+\verb+void gpio_callback()+ - pokazivac na funkciju, poziva se kada je obavljeno debaunsiranje idetektovanpritisak dugmića\\
+
+\subsection{adc\_14}
+Ovaj modul obezbeđuje rad sa kanalom 14 AD konvertora. Implementiranje susledeće funkcije:\\
+\verb+void adc14_start_conversion()+ - zapocinje AD konverziju\\
+\verb+uint16_t adc14_get_result()+ - dohvatanje poslednjeg rezultata konverzije\\
+
+\subsection{led}
+Ovaj modul obezbeđuje rad sa LED displejem. Implementiranje susledeće funkcije:\\
+\verb+void led_refresh()+ - vrši multipleksiranje displeja, potrebno je periodično pozivati\\
+\verb+void led_set_value(uint16_t value)+ - postavlja novu vrednost na LED displej\\
+
+\subsection{uca1}
+Ovaj modul obezbeđuje rad sa univerzalnim komunikacionim serijskim interfejsom. Implementiranje susledeće funkcije\\
+\verb+void uca1_send_byte(uint8_t byte)+ - prihvata osmobitni podatak koji se zatim šalje preko UART-a\\
+
+\subsection{iwrap}
+Ovaj modul obezbeđuje rad sa Bluetooth modulom WT41. Implementiranje susledeće funkcije:\\
+\verb+iwrap_send_text(uint8_t*)+ - funkcija koja se koristi izvan biblioteke za slanje linije teksta modulu koja je terminisana karakterima za kraj reda\\
+\verb+void (*iwrap_serial_send_byte) (uint8_t)+ - pokazivac na funkciju koja se poziva za slanje jednog bajta (omogucava koriscenje bilo kog UART interfejsa)\\
+\verb+void iwrap_send_next_byte()+ - slanje sledećehg bajta kada je UART spreman, pozivati iz TX prekidne rutine\\
+\verb+void iwrap_serial_recieve_byte(uint8_t)+ prihvata bajt primljen od modula,pozivati iz RX prekidne rutine\\
+\verb+uint8_t *iwrap_get_buffer()+ - koristi se izvan biblioteke za dohvatanje bafera primljenih podataka (linija teskta terminisana karakterima za kraj reda)\\
+\verb+void (*iwrap_recieve_callback) ()+ - pokazivac na funkciju, dodeliti funkciju koju je potrebno pozvati kada je primljena linija teksta od modula\\
+
+\subsection{Aplikacija}
+
+\subsubsection{display\_data}
+
+Ova funkcija se poziva samo ako je postavljen odgovarajući fleg. Fleg se postavlja kada su pristigli podaci od \verb+iwrap+ modula. Ovo se postiže dodelom vrednosti pokazivaču na funkciju \verb+iwrap_recieve_callback+ koji se nalazi unutar \verb+iwrap+ modula. Ovom pokazivaču se dodeljuje funkcija \verb+display_data_set_flag+. Zadatak funkcije \verb+display_data+ je da dohvati bafer iz modula \verb+iwrap+ pozivom određene funkcije i tako pročita podatke koji su priljeni. Nakon toga obavlja se provera formata podataka. Ukoliko je format ispravan, pristigla vrednost se ispisuje na LED displeju
+
+\subsubsection{send\_data}
+Ova funkcija se poziva samo ako je postavljen odgovarajući fleg. Fleg se postavlja pozivom odgovarajuće funkcije iz prekidne rutine AD konvertora. Zadatak ove funkcije je da dohvati konvertovanu vrednost pozivom odgovarajuće funkcije. Ova vrednost se koristi za formatiranje poruke koja se zatim šalje \verb+iwrap+ modulu pozivom funkcije \verb+iwrap_send_text+
+
+\subsubsection{debounce}
+Poziva se funkcija modula \verb+gpio+ koja izvršava debaunsiranje dugmića.
+
+\subsubsection{refresh}
+Poziva se funkcija modula \verb+led+ koja izvršava multipleksiranje i osvežavanje LED displeja.

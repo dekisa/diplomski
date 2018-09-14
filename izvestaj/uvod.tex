@@ -1,0 +1,9 @@
+\section{Uvod}
+
+Ovaj izveštaj opisuje realizaciju projekta broj 32. Postavka zadatka je:\\
+
+\textit{Napisati program kojim se omogućava Bluetooth komunikacija između mikrokontrolera i računara. Koristiti Bluetooth2 click na strani mikrokontrolera. Na strani računara napraviti aplikaciju kojom je moguće komunicirati sa mikrokontrolerom. Na pritisak jednog tastera slati izmerenu vrednost sa analognog kanala ADC14. Primljeni podatak sa računara ispisati na LED displej.}\\
+
+Razvojna ploča korišćena za projekat je \verb+RS_MSP430F5438A+ zasnovana na mikrokontroleru \verb+MSP430F5438A+ kompanije Texas Instruments. Bluetooth2 Click kompanije Mikroelektronika je prikačen na jedan od slotova za Click. Bluetooth2 Click je zasnovan na modulu \verb+WT41+ komanije Bluegiga. Razvojno okruženje korišćeno za pisanje softvera je Code Composer Studio v7 koje pruža podršku za konkretan mikrokontroler.\\
+
+Sa strane računara se komunicira preko terminala. Nakon pritiska dugmeta na razvojnoj ploči, ispisuje se poruka u terminalu. Nakon upisivanja vrednosti u terminal, vrednost se ispisuje na LED displeju na razvojnoj ploči. U slučaju unosa neispravnog formata prijavljuje se greška u terminalu.
