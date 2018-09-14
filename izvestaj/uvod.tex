@@ -1,9 +1,29 @@
 \section{Uvod}
 
-Ovaj izveštaj opisuje realizaciju projekta broj 32. Postavka zadatka je:\\
+Diplomski
 
-\textit{Napisati program kojim se omogućava Bluetooth komunikacija između mikrokontrolera i računara. Koristiti Bluetooth2 click na strani mikrokontrolera. Na strani računara napraviti aplikaciju kojom je moguće komunicirati sa mikrokontrolerom. Na pritisak jednog tastera slati izmerenu vrednost sa analognog kanala ADC14. Primljeni podatak sa računara ispisati na LED displej.}\\
+socfpga
+linux
+vhdl
+de1soc
+cyclone5
+alati
 
-Razvojna ploča korišćena za projekat je \verb+RS_MSP430F5438A+ zasnovana na mikrokontroleru \verb+MSP430F5438A+ kompanije Texas Instruments. Bluetooth2 Click kompanije Mikroelektronika je prikačen na jedan od slotova za Click. Bluetooth2 Click je zasnovan na modulu \verb+WT41+ komanije Bluegiga. Razvojno okruženje korišćeno za pisanje softvera je Code Composer Studio v7 koje pruža podršku za konkretan mikrokontroler.\\
+Komunikacija linux operativnog sistema prema hardveru realizovanom u FPGA
 
-Sa strane računara se komunicira preko terminala. Nakon pritiska dugmeta na razvojnoj ploči, ispisuje se poruka u terminalu. Nakon upisivanja vrednosti u terminal, vrednost se ispisuje na LED displeju na razvojnoj ploči. U slučaju unosa neispravnog formata prijavljuje se greška u terminalu.
+U ovom radu je na DE1-SoC razvojnom sistemu implementiran jednostavan hardver u FPGA, portovan je Linux operativni sistem i napisan je drajver za pristup registrima i prihvatanje prekida iz FPGA. (Ovo u zakljucak: Izrada ovog rada je bila motivisana zeljom da se upoznaju konkretni alati i postupak projektovanja sa SoCFPGA sistemima. Izvestaj o radu je napisan tako da pruzi kratak pregled bitnih pojmova i detaljna uputsva za reporodukciju rezultata sa osvrtom na usputne probleme. Steceno znanje moze olaksati slusanje predmeta na master studijama, ili biti osnova za resavanje konkretnog problema (npr. ubrzavanje algoritama kompresije i obrade slike), a autoru je olaksalo snalazenje na novom radnom mestu. Autor izrazava veliku zahvalnost profesoru Lazaru Saranovcu i asistentu Strahinji Jankovicu za podrsku i savete prilikom izrade diplomksog rada.
+
+Sa porastom mogućnosti namenskih sistema došlo je do popularizacije sistema na čipovima (SoC - System on Chip) koji integrišu mikroprocesore sa više jezgara, memorije na čipu, mnogobrojne periferije i transivere, kao i FPGA (Field Programmable Gate Array).
+
+Ova tehnologija daje dizajneru sistema veliku slobodu i mogućnosti. Mogućnosti klasičnog pristpa projektovanju namenskih sistema su proširene punom snagom FPGA. Uz to se ostvaruje veća integracija, manja potrošnja, manja površina štampane ploče(PCB - Printed Circuit Board) i veći protok podataka između procesora i FPGA dela. 
+
+Uobičajena primena ovih sistema je implementacija specifičnih akceleratora koji ubrzavaju izvršavanje algoritama i implementacija specifičnih programabilnih interfejsa ka spoljnom svetu. Nove tehnologije kao što su OpenCL, (navedi jos)omogućavaju kompatibilnost dizajna softvera na visokom nivou i implementiranog hardvera na niskom nivou.
+
+SoCFPGA sistemi najčešće sadrže ARM mikroprocesor. Aplikacije na mikroprocesoru bez operativnog sistema (baremetal) nude jednostavno pisanje koda i uštedu na resursima. Za kompleksnije aplikacije koriste se operativni sistemi (OS) i time se olakšava integrisanje mrežnih protokola, rad sa multimedijalnim sadržajima, kriptografskim bibliotekama kao i mnoge druge mogućnosti koje su dostupne kao open-source softver. Kada je potrebno garantovati reakciju u određenom vremenu na neki spoljni događaj veliki operativni sistemi nisu dobro rešenje i koriste operativni sistemi u realnom vremenu (RTOS).
+
+Hardver u FPGA se projektuje upotrebom nekog dva popularna jezika za opis hardvera (Verilog i VHDL - Very High Speed Integrated Circuit Hardwer Description Language) i softverskih alata za specifični uređaj. Dodatno ovi alati olakšavaju dizajn upotrebom IP( Intelectual Property) blokova kao i generisanjem raznih izlaznih fajlova koji opisuju projektovani hardver na standardni način i koriste se prilikom razvoja softvera.
+
+U ovom radu korišćen je DE1-SoC razvojni sistem koji se vrlo često upotrebljava u edukativne svrhe. Razvojni sistem je zasnovan na čipu iz familije Cyclone 5 kompanije Altera (sada Intel) sa dodatom DDR3 memorijom kapaciteta 1GB i hardverom za audio, video, mrežu i ostalo. Korišćeni alati za razvoj su Quartus, Altera EDK(Embedded Developmnent Kit), i mnogi drugi koji će biti pomenuti u uputsvu.
+
+Kratak opis Cyclone 5 sa procesom boot-ovanja.
+Detaljan opis projekta i svih delova
