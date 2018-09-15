@@ -27,3 +27,76 @@ U ovom radu korišćen je DE1-SoC razvojni sistem koji se vrlo često upotreblja
 
 Kratak opis Cyclone 5 sa procesom boot-ovanja.
 Detaljan opis projekta i svih delova
+Opis DE1-SoC
+
+U nastavku su navedene samo osobine razvojnog sistema koje se tiču ovog rada, a detaljniji opis se moze pronaći u dokumentu DE1-SoC User Manual []
+- Sistem na čipu Cyclone V SoC 5CSEMA5F31
+- Memorija 1GB (2x256Mx16) DDR3 SDRAM povezana na HPS
+- Slot za Micro SD karticu povezan na HPS
+- UART na USB (USB Mini-B konektor)
+- 5 debaunsiranih tastera (FPGA x4, HPS x1)
+- 11 LE dioda (FPGA x10, HPS x 1)
+- 12V DC napajanje
+
+(dodati slike tastera, diodica, itd?)
+
+\verb+[]https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=205&No=836&PartNo=4+
+DE1-SoC User Manual(rev.E Board)
+Terasic
+
+Opis Altera Cyclone 5
+Altera Cyclone 5 je SoC FPGA koji se sastoji od dva dela(slika): procesorski deo (HPS -  Hard processor System) i programabilni FGPA deo. HPS se sastoji od MPU (Microprocessor unit) sa ARM Cortex-A9 MPCore sa dva jezgra i sledećih modula: kontroleri memorije, memorije, periferije, sistem interkonekcije, debug moduli, PLL moduli. FPGA deo se sastoji od sledećih delova: FPGA programabilna logika (look-up tabele, RAM memorije, mnozači i rutiranje), kontrolni blok, PLL, kontroler memorije.
+
+Svaki pin kućista je povezan na samo jedan od ova dva dela sistema, tako da HPS deo i FPGA deo ne mogu međusobno razmenjivati pinove.
+
+Konfigurisanje FPGA i pokretanje HPS
+Pri pokretanju HPS (boot) moze da učita program iz FPGA dela, iz eksterne flash memorije ili preko JTAG. FPGA ima mogućnost da se konfiguriše softverski iz HPS korišćenjem periferije FPGA Manager ili spoljnim programatorom. Kombinacije ovih mogucnosti daju nekoliko scenarija:
+- nezavisno konfigurisanje FPGA i pokretanje HPS
+- konfigurisanje FPGA, zatim pokretanje HPS iz memorije koja se nalazi u FPGA
+- pokretanje HPS, zatim konfigurisanje FPGA iz HPS
+DE1-SoC razvojni sistem dolazi sa integrisanim programatorom kojem se pristupa preko USB porta. Moguće je podesiti konfigurisanje FPGA spolja ili iz HPS upotrebom prekidača MSEL, dok se HPS uvek pokreće iz flash memorije SD kartice.
+(dodati tableu 3-2 iz de1soc user guide)
+
+HPS-FPGA interfejsi
+HPS-FPGA interfejsi su komunikacioni kanali između HPS i FPGA dela. U nastavku su nabrojani i opisani HPS-FPGA interfejsi:
+FPGA-to-HPS bridge - magistrala visokih preformansi konfigurabilne sirine od 32,64 ili 128 bita. Na ovoj magistrali je FPGA master. Ovaj interfejs otkriva FPGA masterima ceo adresni prostor HPS dela.
+HPS-to-FPGA bridge - magistrala visokih preformansi konfigurabilne sirine od 32,64 ili 128 bita. Na ovoj magistrali je HPS master a u FPGA se nalazi slave.
+Lightweight HPS-to-FPGA - magistrala sirine 32 bita. HPS je master na ovoj magistrali. Ovaj interfejs manjeg protoka je namenjen za pristup statusnim i kontrolnim registrima periferijama implementiranim u FPGA delu.
+FPGA manager - HPS periferja koja komunicira sa FPGA delom prilikom konfiguracije ili pokretanja (boot)
+Prekidi - mogucnost povezivanja prekida iz FPGA na HPS kontroler prekida
+HPS debug interfejs - omogućava da se debug mogućnosti prošire i na FPGA deo
+Interfejsi koji su produžetak AXI magistrale na FPGA deo su FPGA-to-HPS bridge, HPS-to-FPGA bridge i Lightweight HPS-to-FPGA. Za povezivanje na ovu magistralu sa strane FPGA koristi se Avalon magistrala, stoga je neophodan AXI-Avalon bridge.
+
+Proces pokretanja HPS (boot)
+Pokretanje HPS je proces koji se obavlja u više koraka. Nakon izvršavanja svakog koraka se učitava i pokreće sledeći. Ovo je proces je sličan kod svih ARM procesora, a u nastavku je ukratko opisan za konkretnu platformu.
+Boot ROM -> Preloader -> bootloader -> Linux
+Pri izlazu iz reset stanja procesor počinje izvrsavanje sa reset vektora iz memorije na čipu. Na adresi reset vektora je upisan Boot ROM progtam. Ovo je prvi korak u pokretanju HPS. BootROM izvršava osnovna podešavanja procesora i dohvata Preloader iz NOR flash memorije, NAND flah memorije ili SD/MMC flash memorije. Očitavaju se BSEL pinovi na osnovu kojih se određuje gde je smešten Preloader, zatim se inicijalizuje taj interfejs i učitava i pokreće Preloader. Boot ROM softver proizvođača i ne može se menjati. 
+
+Preloader je prvi korak u pokretanju koji može da se konfiguriše. Preloader koji se koristi u ovom radu je zasnovan na SPL (Secondaz Program Loader) framework koji je deo U-Boot projekta, što znači da Preloader i U-Boot dele dosta izvornog koda, kao što je mnoštvo pouzdanih drajvera. Preloader obično izvršava inicijalizaciju SDRAM, dodatna podešavanja sitema, inicijalizaciju flash kontrolera koji sadrži sledeći program (NAND, SD/MMC, QSPI) i zatim učitavanje programa u RAM memoriju i pokretanje.
+[slika]
+
+Softver koji sledi nakon Preloader-a može biti baremetal aplikacija ili bootloader. Preloader i svi prethodni programi se izvršavaju na prvom jezgru procesora dok je drugo u reset stanju. Naredni koraci mogu inicijalizovati drugo jezgro.
+
+Bootloader ima zadatak da podesi promenljive OS okruženja, dohvati operativni sistema (sa flash memorije, putem Etherneta preko TFTP protokola ili USB), konfigurise FPGA pruži konzolu za korisničke operacije. Neki od populatnih open-source bootloadera su U-Boot i Barebox.
+
+Alati
+U nastavku će ukratko biti opisani korišćeni alati sa izdvojenim najvažnijim mogućnostima.
+Quartus je softverski alat kompanije Intel za razvoj hardvera na FPGA. Deo Quartus softverskog paketa je Platform Designer (ranije Qsys). Upotrebom ovog alata se u dizajn ukljucuje HPS, IP blokovi i definise se povezanost ovih delova. Platform Designer takodje prilikom povezivanja Avalon IP blokova na AXI magistralu automatski generise AXI-Avalon bridge.
+EDS se koristi
+Git se koristi
+Kroskompajler se koristi
+Make se koristi
+Integracija pogledaj GSRD
+
+Softver
+U-Boot, Linux, drajver
+
+Opis projekta
+U ovom radu je implementiran jednostavan sistem koji demonstira osnovne mogucnosti u dizajniranju sistema na SoC FPGA. 
+DE1-SoC System Builder je jednostavan softver kompanije Terasic koji generise prazan projekat sa povezanim pinovima. Pocevsi od ovog projekta, u Quartus Platform Designeru se dodaje HPS i definise interfejs ka DDR3 memoriji, zatim se dodaje izlazni PIO IP blok za upravljanje LE diodama i ulazni PIO za ocitavanje tastera i slanje prekida.
+
+EDS se koristi za generisanje Preloader-a, Device Tree fajla i konverziju FPGA konfiguracionog fajla u odgovarajuci format. 
+
+Uobicajeni izbor za bootloader-a je U-Boot. Zatim se preuzima, konfigurise i kompajlira U-Boot i Linux kernel, pri cemu U-boot nakon pokretanja ucitava konfiguracionu fajl u RBF formatu i konfigurise FPGA. Zatim ucitava binarni fajl za opis hardverske pratforme (DTB Device Tree Blob) i binarni fajl kernela operativnog sistema. Konfiguracioni argumenti se prosledjuju pri prepustanju toka izvrsavanja kernelu.
+
+
