@@ -1,48 +1,43 @@
 \newcommand\tab[1][1cm]{\hspace*{#1}}
+\section{Uputstvo za repliciranje rezultata}
+
 \begin{enumerate}
 
-\item U \texttt{Windows} okružeju pokrenuti \texttt{DE1SoC\_SystemBuilder} [dostupan gde?]
+\subsection{Projektovanje u Quartus-u}
+\item U \texttt{Microsoft Windows} operativnom sistemu pokrenuti \texttt{DE1SoC\_SystemBuilder.exe} (dostupan na [])
 \item Izabrati konfiguraciju kao na slici \ref{slika:sb} i izabrati Generate\\
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.8]{img/DE1SoC_SystemBuilder.png}
+\includegraphics[scale=0.6]{img/DE1SoC_SystemBuilder.png}
 \caption{Podešavanja \texttt{DE1\_Soc Bulder}-a}
 \label{slika:sb}
-\end{figure}\\
-
-Od genersianih fajlova značajni su:
-\begin{itemize}
-\item .qpf - projektni fajl za Quartus
-\item .qsf - skripta za podešavanje pinova
-\item .sdc - skripta za podešavanje takta
-\item .v - Verilog HDL fajl
-\end{itemize}
-\item  Izbristati \texttt{ld\_dipl.v} fajl (kasnije će biti napravljen \texttt{ld\_dipl.vhd} fajl za VHDL)
-\item  Kopirati fajlove u \texttt{Ubuntu} u radni folder \texttt{$\sim$/ld\_dipl/hw/}
+\end{figure}
+\item  Izbristati \texttt{ld\_dipl.v} fajl (ovaj fajl se ne koristi, kasnije će biti napravljen \texttt{ld\_dipl.vhd} fajl za VHDL)
+\item  Kopirati generisane fajlove u \texttt{Ubuntu} u radni folder (u ovom radu je to \texttt{\textasciitilde/ld\_dipl/hw/})
 \item  Pokrenuti \texttt{Quartus (Quartus Prime 18.0) Lite Edition}
-\item  Otvoriti projekat komandom \texttt{File > Open Project...} i izabrati \texttt{$\sim$/ld\_dipl/hw/ld\_dipl.qpf}
+\item  Otvoriti projekat komandom \texttt{File > Open Project...} i izabrati \texttt{\textasciitilde/ld\_dipl/hw/ld\_dipl.qpf}
 \item U prozoru \texttt{Tasks} izabrati \texttt{Edit Settings}, u novom prozoru pod \texttt{Timing Analyser} ispod teksta \texttt{SDC files to include in the project} klikom na dugme '...' izabrati fajl \texttt{ld\_dipl.sdc}
-\item  Pokrenuti \texttt{Platform Designer (Tools > Platform Designer)}
-\item  Iz prozora \texttt{IP Catalog} izabrati \texttt{Processors and Peripherials} \texttt{> Hard Processor Systems >} \texttt{ArriaV/Cyclone V Hard Processor System}
-\item  Ovim se otvara meni za podešavanje HPS modula
-\item  Pod tabom FPGA interfaces izvršiti sledeće izmene:
+\item  Pokrenuti \texttt{Platform Designer} klikom na \texttt{Tools > Platform Designer}
+\item  Iz prozora \texttt{IP Catalog} izabrati \texttt{Processors and Peripherials} \texttt{> Hard Processor Systems >} \texttt{ArriaV/Cyclone V Hard Processor System}. Ovim se otvara meni za podešavanje HPS modula
+\item  Pod tabom \texttt{FPGA interfaces} izvršiti sledeće izmene:
 \begin{itemize}
-\item	U opštim podešavanjima isključiti opciju Enable MPU standbz and event signals
-\item	U podešavanjima AXI Bridges podesiti FPGA-to-HPS interface i HPS-to-FPGA interface na unused, a Lightweight HPS-to-FPGA na 32-biti
-\item	U podešavanjima FPGA-to-HPS SDRAM Interface izabrati \texttt{f2h\_sdram0} i zatim isključiti pritiskom na dugme '-'
-\item	U podešavanjima Interrupts uključiti opciju Enable FPGA-to-HPS interrupts
+\item	U opštim podešavanjima isključiti opciju \texttt{Enable MPU standby and event signals}
+\item	U podešavanjima \texttt{AXI Bridges} podesiti \texttt{FPGA-to-HPS interface} i \texttt{HPS-to-FPGA interface} na \texttt{unused}, a \texttt{Lightweight HPS-to-FPGA} na \texttt{32-bit}
+\item	U podešavanjima \texttt{FPGA-to-HPS SDRAM Interface} izabrati \texttt{f2h\_sdram0} i zatim isključiti pritiskom na dugme '-'
+\item	U podešavanjima \texttt{Interrupts} uključiti opciju \texttt{Enable FPGA-to-HPS interrupts}
 \end{itemize}
-\item  Pod tabom Peripherial Pins izvršiti sledeće izmene
+\item  Pod tabom \texttt{Peripherial Pins} izvršiti sledeće izmene
 \begin{itemize}
-\item	U podešavanjima SD/MMC Controller postaviti SDIO pin na HPS I/O Set 0 i SDIO mode na 4-bit Data
-\item	U podešavanjima UART Controllers postaviti UART0 pin na HPS I/O Set 0 i UART mode na No Flow Control
+\item	U podešavanjima \texttt{SD/MMC Controller} postaviti \texttt{SDIO} pin na \texttt{HPS I/O Set 0} i \texttt{SDIO mode} na \texttt{4-bit Data}
+\item	U podešavanjima \texttt{UART Controllers} postaviti \texttt{UART0} pin na \texttt{HPS I/O Set 0} i \texttt{UART mode} na \texttt{No Flow Control}
 \end{itemize}
 	\begin{figure}[h!]
 	\centering
 	\textit{U ovom tabu je za potrebe nekog drugog projekta moguce uključiti ostale periferije: CAN Controller, Ethernet Media Access Controller, I2C Controller, SPI Controller, QSPI Flash Controller, NAND Flash Controller, Trace Port Intefrace Unit, GPIO za podesavanja pogledati []}
 	\end{figure}
-\item  Pod tabom HPS Clocks ostaviti podešavanja na podrazumevanim vrednostima
-\item  Pod tabom SDRAM podesiti:
+\item  Pod tabom \texttt{HPS Clocks} ostaviti podešavanja na podrazumevanim vrednostima
+\item  Pod tabom \texttt{SDRAM} podesiti:
+\texttt{
 \begin{itemize}
 \item	SDRAM Protocol: DDR3
 \item	PHY Settings:
@@ -134,8 +129,9 @@ Od genersianih fajlova značajni su:
 \end{itemize}
 \end{itemize}
 \end{itemize}
-Ovim su podešavanja HPS modula završena, izabrati Finish
-\item  Duplim klikom u Export koloni eksportovati signale memory pod imenom \texttt{hps\_0\_ddr} i signale \texttt{hps\_io} pod imenom \texttt{hps\_0\_io}.
+}
+Ovim su podešavanja HPS modula završena, izabrati \texttt{Finish}.
+\item  Duplim klikom u \texttt{Export} koloni eksportovati signale \texttt{memory} pod imenom \texttt{hps\_0\_ddr} i signale \texttt{hps\_io} pod imenom \texttt{hps\_0\_io}.
 \item  Povezati HPS sa izvorom takta kao što je prikazano na slici \ref{slika:q1}
 \begin{figure}[h!]
 \centering
@@ -144,7 +140,7 @@ Ovim su podešavanja HPS modula završena, izabrati Finish
 \label{slika:q1}
 \end{figure}
 \item  Iz prozora \texttt{IP Catalog} izabrati \texttt{Processors and Peripherials > Peripherials > PIO (Parallel I/O) Intel FPGA IP}. Ovim se otvara meni za podešavanje \texttt{PIO IP} bloka
-\item  U podešavnjima \texttt{PIO IP} bloka pod Basic Settings postaviti \texttt{Width: 8} i \texttt{Direction: Output}
+\item  U podešavnjima \texttt{PIO IP} bloka pod \texttt{Basic Settings} postaviti \texttt{Width: 8} i \texttt{Direction: Output}
 \item  Preimenovati \texttt{PIO} blok u \texttt{leds\_0}. Duplim klikom u \texttt{Export} koloni eksportovati signale \texttt{external\_connection} i podesiti ime \texttt{leds\_0\_external\_connection}.
 \item  Povezati \texttt{leds\_0} blok sa izvorom takta i resetom, zatim povezati Avalon Memory Mapped Slave pod imenom \texttt{s1} sa \texttt{hps\_0} interfejsom \texttt{h2f\_lw\_axi\_master}, kao što je prikazano na slici \ref{slika:q2}
 \begin{figure}[h!]
@@ -155,8 +151,8 @@ Ovim su podešavanja HPS modula završena, izabrati Finish
 \end{figure}
 \item  Ponovo iz prozora \texttt{IP Catalog} izabrati\texttt{ Processors and Peripherials > Peripherials > PIO (Parallel I/O) Intel FPGA IP}. Ovim se otvara meni za podesavanje \texttt{PIO IP} bloka
 \item  U podešavnjima \texttt{PIO IP} bloka pod \texttt{Basic Settings} postaviti \texttt{Width: 8}, \texttt{Direction: Input}.
-\item  U podešavanjima \texttt{PIO IP} bloka pod Edge capture register uključiti opciju \texttt{Synchronously capture, Edge Type} podesiti na \texttt{ANY}, i uključiti \texttt{bit-clearing for edge capture register}.
-\item  U podešavanjima \texttt{PIO IP} bloka pod Interrupt uključiti opciju \texttt{Generate IRQ} i izabrati \texttt{IRQ Type: EDGE}
+\item  U podešavanjima \texttt{PIO IP} bloka pod \texttt{Edge capture register} uključiti opciju \texttt{Synchronously capture, Edge Type} podesiti na \texttt{ANY}, i uključiti \texttt{bit-clearing for edge capture register}.
+\item  U podešavanjima \texttt{PIO IP} bloka pod \texttt{Interrupt} uključiti opciju \texttt{Generate IRQ} i izabrati \texttt{IRQ Type: EDGE}
 \item  Preimenovati \texttt{PIO} blok u \texttt{keys\_0}. Duplim klikom u \texttt{Export} koloni eksportovati signale \texttt{external\_connection} i podesiti ime \texttt{keys\_0\_external\_connection}.
 \item  Povezati \texttt{keys\_0} blok sa izvorom takta i resetom, zatim povezati Avalon Memory Mapped Slave pod imenom \texttt{s1} sa \texttt{hps\_0} interfejsom  \texttt{h2f\_lw\_axi\_master} i na kraju povezati \texttt{irq} signal na \texttt{f2h\_irq0} interfejs \texttt{hps\_0} bloka, kao što je prikazano na slici \ref{slika:q3}
 \begin{figure}[h!]
@@ -168,9 +164,9 @@ Ovim su podešavanja HPS modula završena, izabrati Finish
 \item  Duplim klikom u koloni \texttt{Base} podesiti adresu porta \texttt{s1} bloka \texttt{leds\_0} i porta \texttt{s1} bloka \texttt{keys\_0} kao na tabeli 1.
 \item  Sačuvati \texttt{Platform Designer} projekat izborom \texttt{File > Save} i sačuvati ga pod imenom \texttt{ld\_dipl\_system.qsys}
 \item  Trebalo bi da se pojavi obaveštenje \texttt{Save System: completed successfully}. Zatim odabrati iz menija \texttt{Generate > Generate HDL... }U novom prozoru podesiti \texttt{Create HDL design files for synthesis: VHDL} i isključiti opciju \texttt{Crete block symbol file (.bsf)}. Pokrenuti generisanje klikom na \texttt{Generate}. Proces bi trebalo da se završi bez grešaka ali može imati upozorenja.
-\item  Zatvoriti \texttt{Platform Designer}. U prozoru \texttt{Quartus}-a izabrati \texttt{Project > Add/Remove Files in Project...} i u meniju klikom na '...' izabrati fajl \texttt{ld\_dipl\_system/synthesis/ld\_dipl\_system.qip}.
+\item  Zatvoriti \texttt{Platform Designer}. U prozoru \texttt{Quartus}-a izabrati \texttt{Project > Add/Remove Files in Project...} i u meniju klikom na '...' izabrati fajl\\ \texttt{ld\_dipl\_system/synthesis/ld\_dipl\_system.qip}.
 \item  Izabrati \texttt{File > New VHDL File} i novi fajl nazvati \texttt{ld\_dipl.vhd}. Pod \texttt{Project Navigator > Files} desnim klikom na \texttt{ld\_dipl.vhd} izabrati \texttt{Set as Top-Level Entity}.
-\item  U ovom fajlu je potrebno instancirati HPS komponentu iz \texttt{Platform Designer}-a. Potrebno je ručno napiati ovaj fajl (primer za ovaj rad dat je u dodatku. Takođe među generisanim fajovima nalazi se deklaracija komponente \texttt{ld\_dipl\_system} koja može biti od pomoći (fajl \texttt{$\sim$/ld\_dipl/hw/ld\_dipl\_system/ld\_dipl\_system.cmp}).
+\item  U ovom fajlu je potrebno instancirati HPS komponentu iz \texttt{Platform Designer}-a. Potrebno je ručno napiati ovaj fajl (primer za ovaj rad dat je u dodatku. Takođe među generisanim fajovima nalazi se deklaracija komponente \texttt{ld\_dipl\_system} koja može biti od pomoći (fajl \texttt{\textasciitilde/ld\_dipl/hw/ld\_dipl\_system/ld\_dipl\_system.cmp}).
 \item  Izabrati \texttt{Processing > Start > Start Analysis and Synthesis}
 \item  Izabrati \texttt{Tools > Tcl Scripts...}\\
 \begin{figure}[h!]
@@ -183,6 +179,226 @@ Ovim su podešavanja HPS modula završena, izabrati Finish
  
  Izabrati \texttt{hps\_sdram\_p0\_pin\_assignments.tcl} i kliknuti Run. Ukoliko dođe do grešaka proveriti da li je izvršen prethodni korak.
 \item  Pokrenuti kompajliranje projekta izborom \texttt{Processing > Start Compilation}
- 
+
+\subsection{Podešavanja okruženja i preuzimanje kompajlera}
+\item Preuzeti arhivu sa Linaro toolchain-om\\
+\texttt{wget https://releases.linaro.org/components/toolchain/binaries/7.2-2017.11/\\arm-linux-gnueabihf/gcc-linaro-7.2.1-2017.11-x86\_64\_arm-linux-gnueabihf.tar.xz}
+\item Otpakovati preuzeti toolchain:\\
+\texttt{tar -xf arm-linux-gnueabihf/gcc-linaro-7.2.1-2017.11-x86\_64\_arm-linux-gnueabihf.tar.xz \textasciitilde/ld\_dipl/sw/toolchain}
+\item Dodati putanju za toolchain u promenljivu okruženja \texttt{PATH}.\\
+\texttt{export PATH=\textasciitilde/ld\_dipl/sw/toolchain/bin:\$PATH}
+\item Podesiti promenljive okruženja\\
+\texttt{export ARCH=arm}\\
+\texttt{export CROSS\_COMPILE=arm-linux-gnueabihf-}\\
+\item Pokrenuti podešavanja Altera SOC EDS:\\ 
+\texttt{cd ~/intelFPGA/18.0/embedded}\\
+\texttt{source embedded\_command\_shell.sh}
+\item Dodati putanju za Quartus alate u promenljivu okruženja \texttt{PATH}:\\
+\texttt{export PATH=\textasciitilde/intelFPGA\_lite/18.0/quartus/bin/:\$PATH}
+
+\subsection{Generisanje RBF fajla}
+\item \texttt{quartus\_cpf -c -o bitstream\_compression=on \textbackslash \\ \textasciitilde/ld\_dipl/hw/ld\_dipl.sof \textbackslash \\ \textasciitilde/ld\_dipl/sdcard/fat32/socfpga.rbf}
+\subsection{Generisanje i kompajliranje Preloader-a}
+\item Pokrenuti Preloader generator komadnom:\\ \texttt{bsp-editor}
+\item Izabrati \texttt{File > New HPS BSP...}
+\item U novom prozoru podesiti \texttt{Preloader Settings Directory:} \\ \texttt{ \textasciitilde/ld\_dipl/hw/hps\_isw\_handoff/ld\_dipl\_system\_hps\_0}
+\item Isključiti opciju: \texttt{Use default locations} i podesiti \texttt{BSP target directory:} \\ \texttt{\textasciitilde/ld\_dipl/sw/preloader}. Podešavanja bi trebalo da izgledaju kao na slici \ref{slika:bsp1}. Izabrati \texttt{OK}.
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6]{img/bsp1.png}
+\caption{Podešavanja \texttt{bsp-editor}-a}
+\label{slika:bsp1}
+\end{figure}
+\item U podešavanjima pod \texttt{spl.boot} uključiti \texttt{FAT\_SUPPORT} i ostala podešavanja ostaviti na podrazumevanim vrednostima. Izabrati \texttt{Generate} i po završenom generisanju zatvoriti program.
+\item Izvršiti komande za kompajliranje Preloader-a\\
+\texttt{cd \textasciitilde/ld\_dipl/sw/preloader}\\
+\texttt{make}
+\item Kopirati kompajlirani Preloader:
+\texttt{cp \textasciitilde/ld\_dipl/sw/preloader/preloader-mkpimage.bin \textasciitilde/ld\_dipl/sdcard/a2/}\\
+
+\subsection{Generisanje Device Tree}
+\item Uporebom Alterinog alata generisati \texttt{Device Tree} komandom: \\
+\texttt{sopc2dts -i ~/ld\_dipl/hw/ld\_dipl\_system.sopcinfo \\-o ~/ld\_dipl/hw/ld\_dipl\_generated.dts}
+
+\subsection{U-Boot}
+\item Preuzeti izvorni kod projekta U-boot komandom\\ \texttt{git clone git://git.denx.de/u-boot.git \textasciitilde/ld\_dipl/sw/u-boot}
+\item Promeniti radni direktorijum\\ \texttt{\textasciitilde/ld\_dipl/sw/u-boot/}
+\item Napraviti novu granu na osnovu verzije v2018.01 komandom:\\ \texttt{git checkout v2018.01 -b tmp}
+\item Konfigurisati U-Boot za DE1-SoC razvojni sistem\\ \texttt{make socfpga\_de1\_soc\_defconfig}
+\item Otvoriti meni za konfigurisanje U-Boot\\ \texttt{make menuconfig}
+\item U ovom meniju je potrebno podesiti da se pri pokretanju U-Boot pokrene naša skripta \texttt{callscript}. Izabrati opciju \texttt{Enable a default value for bootcmd} pritiskom tastera \texttt{space}.
+\item U novoj opciji \texttt{bootcmd value} pritiskom tastera \texttt{enter} otvoriti novi meni i upisati tekst\\ \texttt{run callscript}\\
+Nakon ovog podešavanja bi prozor trebalo da izgleda kao na slici \ref{slika:uboot}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6, trim={0 0 10 60},clip]{img/uboot.png}
+\caption{Konfiguracija U-Boot}
+\label{slika:uboot}
+\end{figure}
+\item Izaći iz konfiguracionog menija izborom opcije \texttt{exit} (strelica desno i zatim \texttt{enter}). Sačuvati podešavanja izborom \texttt{Yes}.
+\item Otvoriti konfiguracioni \texttt{.h} fajl komandom:\\
+\texttt{vi include/configs/socfpga\_de1\_soc.h}
+U ovom fajlu je potrebno uneti izmene kao na slici \ref{slika:uboot10}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6, trim={0 15 10 60},clip]{img/uboot1.png}
+\caption{Izmena U-Boot konfiguracionog fajla}
+\label{slika:uboot10}
+\end{figure}
+\item Pokrenuti kompajliranje U-Boot komandom\\
+\texttt{make}
+\item Kopirati kompajlirani U-Boot\\
+\texttt{cp \textasciitilde/ld\_dipl/sw/u-boot/u-boot.img \textasciitilde/ld\_dipl/sdcard/fat32/u-boot.img }
+\item Otvoriti novi tekstualni fajl:\\
+\texttt{vi u-boot.script}\\
+U ovom fajlu je potrebno napisati skriptu za U-Boot. Ranije u radu je dato objašnjenje skripte, dok se ceo kod nalazi u dodatku rada.
+\item Konvertovati napisanu skriptu u odgovarajući format komandom:\\
+\texttt{mkimage -A arm -O linux -T script -a 0 -e 0 -n Boot\_script -d u-boot.script u-boot.scr}
+\item Kopirati kompajlirani U-Boot\\
+\texttt{cp \textasciitilde/ld\_dipl/sw/u-boot/u-boot.scr \textasciitilde/ld\_dipl/sdcard/fat32/u-boot.scr }
+
+\subsection{Linuks kernel}
+\item Preuzeti izvorni kod Linuks kernela:\\
+\texttt{git clone git://github.com/torvalds/linux \textasciitilde/ld\_dipl/sw/linux}
+\item Promeniti radni direktorijum\\
+\texttt{cd \textasciitilde/ld\_dipl/sw/linux}
+\item Napraviti novu granu na osnovu verzije 4.6-rc2 komandom:\\ \texttt{git checkout 4.6-rc2 -b tmp}
+\item Konfigurisati linuks za Cyclone V arhitekturu\\
+\texttt{make socfpga\_defconfig}
+\item Pokrenuti kompajliranje linuksa\\
+\texttt{make zImage}
+\item Kopirati kompajlirani kernel u pripremni folder\\
+\texttt{cp arch/arm/boot/zImage \textasciitilde/ld\_dipl/sdcard/fat32/zImage}
+
+
+\subsubsection*{Ručno pisanje Device Tree}
+\item Početi od Device Tree fajla\\
+\texttt{cp arch/arm/boot/dts/socfpga\_cyclone5\_socdk.dts \\arch/arm/boot/dts/socfpga\_cyclone5\_ld\_dipl.dts}
+\item Isključiti \texttt{CAN} podešavanjem parametra \texttt{status = 'disabled'}. Ovaj korak je neophodan za uspešno pokretanje sistema jer DE1-SoC nema \texttt{CAN}. Pogledati sliku \ref{slika:dts1}
+\item Iz Device Tree fajla generisanog Alterinim alatom izdvojiti samo najbitnije informacije i upisati u novi fajl. Pogledati sliku \ref{slika:dts1}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6,trim={0 15 10 60},clip]{img/dts1.png}
+\caption{Izmena Device Tree fajla}
+\label{slika:uboot1}
+\end{figure}
+\item Pokrenuti kompajliranje Device Tree fajla\\
+\texttt{make socfpga\_cyclone5\_ld\_dipl.dtb}
+\item Kopirati kompajlirani Device Tree Blob u pripremni folder\\
+\texttt{cp \textasciitilde/ld\_dipl/sw/linux/arch/arm/boot/dts/socfpga\_cyclone5\_ld\_dipl.dtb \\ \textasciitilde/ld\_dipl/sdcard/fat32/socfpga.dtb }
+
+
+\subsection{Kompajliranje drajvera}
+\item Promeniti radni folder\\
+\texttt{cd \textasciitilde/ld\_dipl/sw/device\_driver}\\
+U ovom folderu se nalazi izvorni fajl drajvera \texttt{ld\_dipl.c} i odgovarajući \texttt{Makefile}
+\item Podesiti promenljivu koja ukazuje na izvorni kod linuks kernela\\
+\texttt{export OUT=\textasciitilde/ld\_dipl/sw/linux}
+\item Pokrenuti kompajliranje komandom\\
+\texttt{make}
+\item Kopirati kompajlirani drajver u pripremni direktorijum\\
+\texttt{cp \textasciitilde/ld\_dipl/sw/device\_driver/ld\_dipl.ko \textasciitilde/ld\_dipl/sdcard/ld\_dipl.ko }
+
+\subsection{Generisanje Root File System}
+\item Preuziti \texttt{Buildroot}
+\texttt{git clone git://git.busybox.net/buildroot \textasciitilde/ld\_dipl/sw/buildroot}
+\item Promeniti radni folder\\
+\texttt{cd \textasciitilde/ld\_dipl/sw/buildroot}
+\item Napraviti novu granu na osnovu verzije 2017.08 komandom:
+\texttt{git checkout 2017.08 -b tmp}
+\item Pokrenuti konfiguracioni meni komandom\\
+\texttt{make menuconfig}
+\item U konfoguracionim meniju izvršiti sledeće izmene
+\begin{enumerate}
+\item Target options ---\>
+	\begin{itemize}
+	\item Target Architecture (ARM(little endian))
+	\item Target Architecture Variant (cortex-A9)
+	\item Target ABI (EABIhf)
+	\item Floating point strategy (VFPv3)
+	\end{itemize}
+\item Toolchain ---\>
+	\begin{itemize}
+	\item Toolchain type (External toolchain)
+	\item Toolchain (Linaro ARM 2017.11)
+	\item Toolchain origin (Pre-installed toolchain) ---\>\\ \texttt{\textasciitilde/ld\_dipl/sw/gcc-linaro-7.2.1-2017.11-x86\_64\_arm-linux-gnueabihf}
+	\end{itemize}
+\item Kernel ---\> 
+	\begin{itemize}
+	\item []Linux Kernel
+	\end{itemize}
+\end{enumerate}
+\item Pokrenuti izvršavanje komandom\\
+\texttt{make}
+\item Kopirati fajl sistem u pripremni direktorijum\\
+\texttt{cp \textasciitilde/ld\_dipl/sw/buildroot/output/images/rootfs.tar \textasciitilde/ld\_dipl/sdcard/rootfs.tar }
+
+\subsection{Priprema SD kartice}
+\item Ubaciti SD karticu u računar. Zaključiti pod kojim imenom se kartica pojavila u sistemskom folderu \texttt{/dev} (za primer je uzeto \texttt{/dev/sdx} )
+\item Formatirati SD karticu komandom\\
+\texttt{sudo dd if=/dev/zero of=/dev/sdx bs=512 count=1}
+\item Particionisati SD karticu pokretanjem interaktivnog programa \texttt{fdisk}\\
+\texttt{ sudo fdisk /dev/sdx}\\
+	u kom treba uneti sledeće komande\\
+	\texttt{
+	n p 3 <default> 4095 t a2 \\
+ 	n p 1 <default> +32M t 1 b \\
+ 	n p 2 <default> +512M t 2 83 \\
+ 	w \\
+ 	}
+\item Napraviti prazne fajl sisteme na odgovarajućim particijama\\
+\texttt{sudo mkfs.vfat /dev/sdx1\\
+sudo mkfs.ext3 -F /dev/sdx2}
+\item Promeniti radni folder\\
+\texttt{cd \textasciitilde/ld\_dipl/sdcard}
+\item Napraviti foldere na koje će se mount-ovati SD kartica\\
+\texttt{
+mkdir mountfat32\\
+mkdir mountext3
+}
+\item Mount-ovati odgovarajuće particije\\
+\texttt{
+sudo mount /dev/sdx1 \textasciitilde/ld\_dipl/sdcard/mountfat32 \\
+sudo mount /dev/sdx2 \textasciitilde/ld\_dipl/sdcard/mountext3
+}
+\item Napisati Preloader na odgovarajuću particiju\\
+\texttt{sudo dd if=\textasciitilde/ld\_dipl/sdcard/a2/preloader-mkpimage.bin of=/dev/sdx3 bs=64K seek=0}
+\item Kopirati binarne fajlove za pokretanje sistema na odgovarajuću particiju\\
+\texttt{sudo cp \textasciitilde/ld\_dipl/sdcard/fat32/* \textasciitilde/ld\_dipl/sdcard/mountfat32} 
+\item Otpakovati fajlsistem na SD karticu\\
+\texttt{taf -xf rootfs.tar mountext3}
+\item Kopirati modul drajvera na SD karticu\\
+\texttt{cp ld\_dipl.ko mountext3/root/home}
+\item Uveriti se da su svi fajlovi uspešno kopirani komandom\\
+\texttt{sync}
+\item Unmount-ovati sve particije\\
+\texttt{umount \textasciitilde/ld\_dipl/sdcard/mountfat32
+umount \textasciitilde/ld\_dipl/sdcard/mountext3}
+
+\subsection{Testiranje sistema}
+\item Proverti da li su \texttt{MSEL} podešeni za konfigurisanje FPGA sa HSP (ima negde lepa slika)
+\item Pruključiti DE1-SoC na napajanje
+\item Povezati Mini USB kablom PC računar i port na DE1-SoC ploči koji je obležen sa UART
+\item Ubaciti SD karticu u odgovarajući slot
+\item Na PC računaru pokrenuti i podseiti \texttt{minicom}\\
+\texttt{sudo minicom -s}
+\item U podešavanjima \texttt{Serial port setup} uneti izmene kao na slici \ref{slika:minicom} (može se razlikovati ime \texttt{Setial device})
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6,trim={0 15 10 60},clip]{img/minicom.png}
+\caption{Podešavanje \texttt{minicom}-a}
+\label{slika:minicom}
+\end{figure}
+\item Pokrenuti DE1-SoC pritiskom crvenog tastera
+\item Nakon pokretanja sistema potrebno je ulogovati se kao korisnik sa:q\\
+\texttt{Username:root\\
+Password:root}
+\item Učitati modul drajvera u linuks kernel komandom:\\
+\texttt{insmod /root/home/ld\_dipl.ko}
+\item Uveriti se da su se pojavili odgovarajući sistemski fajlovi:\\
+\texttt{ls /sys/bus/platform/...}
+\item Uključiti LE diode\\slika
+\item Uključiti prekida\\slika
+
 
 \end{enumerate}
