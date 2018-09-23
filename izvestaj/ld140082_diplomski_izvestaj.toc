@@ -7,25 +7,27 @@
 \contentsline {subsubsection}{\numberline {1.3.2}HPS-FPGA interfejsi}{4}
 \contentsline {subsubsection}{\numberline {1.3.3}Proces pokretanja HPS (boot)}{5}
 \contentsline {subsection}{\numberline {1.4}Alati}{5}
-\contentsline {section}{\numberline {2}Opis projektovanog sistema}{7}
-\contentsline {subsection}{\numberline {2.1}Memorijski mapiran interfejs ka LE diodama i tasterima u FPGA}{7}
-\contentsline {subsection}{\numberline {2.2}Preloader}{7}
-\contentsline {subsection}{\numberline {2.3}Bootloader}{7}
-\contentsline {subsection}{\numberline {2.4}Linuks kernel i Root File System}{8}
-\contentsline {subsection}{\numberline {2.5}Drajver}{8}
-\contentsline {section}{\numberline {3}Uputstvo za repliciranje rezultata}{9}
-\contentsline {subsection}{\numberline {3.1}Projektovanje u Quartus-u}{9}
-\contentsline {subsection}{\numberline {3.2}Pode\IeC {\v s}avanja okru\IeC {\v z}enja i preuzimanje kompajlera}{15}
-\contentsline {subsection}{\numberline {3.3}Generisanje RBF fajla}{15}
-\contentsline {subsection}{\numberline {3.4}Generisanje i kompajliranje Preloader-a}{15}
-\contentsline {subsection}{\numberline {3.5}Generisanje Device Tree}{16}
-\contentsline {subsection}{\numberline {3.6}U-Boot}{16}
-\contentsline {subsection}{\numberline {3.7}Linuks kernel}{18}
-\contentsline {subsection}{\numberline {3.8}Kompajliranje drajvera}{19}
-\contentsline {subsection}{\numberline {3.9}Generisanje Root File System}{19}
-\contentsline {subsection}{\numberline {3.10}Priprema SD kartice}{20}
-\contentsline {subsection}{\numberline {3.11}Testiranje sistema}{21}
-\contentsline {section}{\numberline {4}Zaklju\IeC {\v c}ak}{23}
-\contentsline {section}{\numberline {5}Dodatak}{24}
-\contentsline {subsection}{\numberline {5.1}Izvorni kod drajvera}{24}
-\contentsline {subsection}{\numberline {5.2}Skripta za U-Boot}{29}
+\contentsline {section}{\numberline {2}Opis projektovanog sistema}{8}
+\contentsline {subsection}{\numberline {2.1}Memorijski mapiran interfejs ka LE diodama i tasterima u FPGA}{8}
+\contentsline {subsection}{\numberline {2.2}Preloader}{9}
+\contentsline {subsection}{\numberline {2.3}Bootloader}{9}
+\contentsline {subsubsection}{\numberline {2.3.1}Skripta za U-Boot}{10}
+\contentsline {subsection}{\numberline {2.4}Device Tree}{11}
+\contentsline {subsection}{\numberline {2.5}Linuks kernel i Root File System}{11}
+\contentsline {subsection}{\numberline {2.6}Drajver}{11}
+\contentsline {section}{\numberline {3}Uputstvo za repliciranje rezultata}{12}
+\contentsline {subsection}{\numberline {3.1}Projektovanje u Quartus-u}{12}
+\contentsline {subsection}{\numberline {3.2}Pode\IeC {\v s}avanja okru\IeC {\v z}enja i preuzimanje kompajlera}{18}
+\contentsline {subsection}{\numberline {3.3}Generisanje RBF fajla}{18}
+\contentsline {subsection}{\numberline {3.4}Generisanje i kompajliranje Preloader-a}{18}
+\contentsline {subsection}{\numberline {3.5}Generisanje Device Tree}{19}
+\contentsline {subsection}{\numberline {3.6}U-Boot}{19}
+\contentsline {subsection}{\numberline {3.7}Linuks kernel}{21}
+\contentsline {subsection}{\numberline {3.8}Kompajliranje drajvera}{22}
+\contentsline {subsection}{\numberline {3.9}Generisanje Root File System}{22}
+\contentsline {subsection}{\numberline {3.10}Priprema SD kartice}{23}
+\contentsline {subsection}{\numberline {3.11}Testiranje sistema}{24}
+\contentsline {section}{\numberline {4}Zaklju\IeC {\v c}ak}{26}
+\contentsline {section}{\numberline {5}Dodatak}{27}
+\contentsline {subsection}{\numberline {5.1}Izvorni kod drajvera}{27}
+\contentsline {subsection}{\numberline {5.2}Skripta za U-Boot}{31}
