@@ -1,3 +1,10 @@
+dodati tabelu registara PIO
+dodati opis linuksa
+dodati opis buildroot
+dodati opis device tree model
+dodati proceduru tersiranja
+dodati device tree u dodatak
+
 \section{Uvod}
 U ovom radu je na DE1-SoC razvojnom sistemu implementiran jednostavan hardver u FPGA, portovan je Linuks operativni sistem i napisan je drajver za pristup registrima i prihvatanje prekida iz FPGA. 
 
@@ -192,22 +199,159 @@ Nakon učitavanja ovih fajlova izvršavaju se sledeće važne komande:
 \end{itemize}
 
 \subsection{Device Tree}
+Device Tree ili skraćeno DT je struktura podataka koja opisuje hardver. Koristi se za identifikaciju platforme i podešavanje u toku izvršavanja kao što argumenti pri pokretanju kernela (promenljiva \textit{bootargs} koja je pomenuta ranije). Ovaj način organizacije je uveden iz potrebe da se standardizuje način pokretanja kernela i interfejs između \textit{bootloader}-a i kernela i omogućilo jednostavno dodavanje novih platofrmi. Tako na primer jednom kompajlirani kernel može da se koristi na različitim platformama. Device Tree Source koji opisuje detalje hardvera se kompajlira alatom Device Tree Compiler u binarni fajl Device Tree Blob. Device Tree Blob učitava \textit{bootloader} i prosleđuje kernelu.
+\subsubsection{Struktura Device Tree}
+Device Tree struktura podataka je organizovana kao drvo tako da se sastoji od čvorova (\textit{node}). Svaki čvor u ovoj strukturi mora imati čvor koji se nalazi iznad njega u hijerarhiji (\textit{parent node}) osim korena stabla (\textit{root node}). Svaki čvor predstavlja jedan drajver ili modul i sadrži opis osobine. Ukoliko postoje pravila za organizaciju informacija unutar čvora ona su opisana u \textit(bindings) delu u Linuks dokumentaciji[https://github.com/torvalds/linux/tree/master/Documentation/devicetree/bindings] Device Tree ne mora da opiše svaki deo hardvera, a čvorovi koji su uobičajeni opisuju:
+\begin{itemize}
+\item procesori sistema (ovaj čvor je neophodan po specifikaciji)
+\item memorije sistema (ovaj čvor je neophodan po specifikaciji)
+\item specijalni konfiguracioni čvor za podešavanje argumemnata pri pokretanju kernela, podrazumevanih ulazno/izlaznih uređaja (ovaj čvor je neophodan po specifikaciji)
+\item čvor koji opusje generalne osobine sistem na čipu (ovaj čvor je neophodan ukoliko je procesor u sistemu na čipu)
+\item čvorovi koji opisuju magistrale sistema (ovaj čvor nije neophodan ali se preporučuje)
+\end{itemize}
 
-\subsection{Linuks kernel i Root File System}
+Neke od vaznih osobina u čvoru su:
+\begin{itemize}
+\item \texttt{compatible} - koristi se da označi kompatibilnost uređaja sa porodicom sličnih uređaja i za uparivanje drajvera i uređaja
+\item \texttt{reg} - opisuje deo adresnog prostora u kom se nalazi uređaj kao par: početna adresa i dužina adresnog opsega
+\item \texttt{#address-cells} - određuje koliko 32-bitnih ćelija se koristi za opis početne adrese u \texttt{reg}
+\item \texttt{#size-cells} - određuje koliko 32-bitnih ćelija se koristi za opis dužine adresnog opsega u \texttt{reg} polju
+\item \texttt{interrupts} - koristi se za uređaje koji generišu prekid i opisuje najčešće broj prekida i tip (nivo/ivica)
+\item \texttt{interrupt-parent} - koristi se za uređaje koji generišu prekid i pokazuje na kontroler prekida kojem se šalje prekidni zahtev
+\item \texttt{interrupt-controller} - \texttt{boolean} vrednost koja označava da li je uređaj kontroler prekida
+\item \texttt{#interrupt-cells} - određuje koliko 32-bitnih ćelija se koristi za opis \texttt{interrupts} polja u uređajima koji koriste kontroler prekida
+\end{itemize}
+
+U nastavku(premestiti u dodatak?) je na primeru dat pojednostavljeni Device Tree Source koji opisuje DE1-SoC razvojni sistem. Na osnovu prethodnog tekst se lako može razumeti organizacija sistema. Pojednostavljenje ovog primera se svodi na izostavljanje uređaja sistama na čipu čiji rad se ne izučava u ovom radu. Ceo Device Tree je podeljen u nekoliko fajlova i može se pronaći u literaturi[]socfpga_cyclone5_socdk.dts socfpga_cyclone5.dtsi socfpga.dtsi Iz priloženog koda se vidi da se sistem sastoji od:
+\begin{itemize}
+\item dva procesorska jezgra Cortex-A9
+\item standardni ulazno/izlazni uređaj je serijski uređaj \texttt{serial0}
+\item RAM memorija je kapaciteta 1GB
+\item koristi se kontroler prekida  ARM Generic Interrupt Controller
+\item na memorijskoj adresu \texttt{0xff200000} koja odgovara početku adresnog prostora AXI magistrale koji izlazi prema FPGA se nalazi korisnički hardver koji se implementira u ovom radu i zauzima adresni opseg dužine 32 memorijske lokacije, prekidni zahtev je pod brojem 40 i ostljiv je na uzlaznu i silaznu ivicu
+\item \texttt{serial0} je periferija \texttt{uart0} na naznačenoj adresi i sa naznačenim brojem prekida
+\end{itemize}
+\begin{lstlisting}[language=C]
+/ {
+	#address-cells = <1>;
+	#size-cells = <1>;
+	
+	cpus {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		cpu0: cpu@0 {
+			compatible = "arm,cortex-a9";
+			device_type = "cpu";
+			reg = <0>;
+		};
+		cpu1: cpu@1 {
+			compatible = "arm,cortex-a9";
+			device_type = "cpu";
+			reg = <1>;
+		};
+	};
+	
+	chosen {
+		bootargs = "earlyprintk";
+		stdout-path = "serial0:115200n8";
+	};
+
+	memory@0 {
+		name = "memory";
+		device_type = "memory";
+		reg = <0x0 0x40000000>; /* 1GB */
+	};
+
+	intc: intc@fffed000 {
+		compatible = "arm,cortex-a9-gic";
+		#interrupt-cells = <3>;
+		interrupt-controller;
+		reg = <0xfffed000 0x1000>,
+		      <0xfffec100 0x100>;
+	};
+	soc {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		compatible = "simple-bus";
+		device_type = "soc";
+		interrupt-parent = <&intc>;
+		ranges;
+		
+		lddipl0: lddipl@0xff200000 {
+			compatible = "ld,dipl";
+			reg = <0xff200000 0x00000020>;
+			interrupts = <0 40 1>;
+			
+		uart0: serial0@ffc02000 {
+			compatible = "snps,dw-apb-uart";
+			reg = <0xffc02000 0x1000>;
+			interrupts = <0 162 4>;
+		};
+\end{lstlisting}
+
+Kada je Device Tree Source napisan potrebno je smestiti \texttt{.dts} fajl u folder \{arch/arm/boot/dts/}. Kompajliranje izovrnog opisa u binarni fajl Device Tree Blob se ivršava komandom \texttt{make *.dtb} gde je potrebno upisati naziv fajla koji se kompajlira.
+
+Potrebno je napomenuti da je u ovom radu modifikovan Device Tree za razvojni sistem Cyclone V Develompent Kit koji je veoma sličan DE1-SoC. Uvedene modifikacije se svode na isključivanje CAN uređaja koji Cyclone V Develompent Kit ima a DE1-SoC nema. Zatim je dodat opis implementiranih PIO Intel FPGA IP u FPGA. Drugi način dobijanja Device Tree koji nije zahtevao ručnu modifikaciju je korišćenje Device Tree Generator-a koji je dostupan u okviru Altera Embedded Develompment Suite paketa softverskih alata.Za ovaj način je testiranjem utvrđeno da postoji problem: naime, drajver ne vidi uređaje koji pripadaju čvoru \texttt{bridge} koji opisuje adresni prostor između FPGA i HPS i samim tim i generisani hardver u FPGA. Razlog ovome je najverovatnije različita verzija kernela od one za koju je alat namenjen, ali je u skladu sa edukativnim ciljem ovog rada izabran put ručnog pisanja Device Tree umesto korišćenja generisanog.
+
+\subsection{Linuks kernel}
+
 Izvorni kod za Linuks kernel je preuzet za Alterinog \texttt{git}-a. \textit{Root file system} je generisan korišćenjem \texttt{buildroot}-a i upisan na SD karticu.
 
 \subsection{Drajver}
-Drajver je napisan kao modul kernela koji se uključuje odgovarajućom komandom. Nakon uključivanja drajver iz binarnog opisa harvdera (\textit{Device Tree Blob}) učitava informacije o harvderu. Drajver pravi fajlove u \texttt{sysfs} fajl sistemu. Čitanje i upis u ove fajlove poziva odgovarajuće funkcije u drajveru koje upravljaju hardverom.
+Drajver imaju specijalnu ulogu u Linuks kernelu. Drajver je deo sistema koji obezbeđuje da deo hardvera radi na očekivani način preko jednostavno definisanog programerskog interfejsa, pri čemu se krije kompleksnost detalja rada hardvera. Korisničke aktivnosti se svode na jednostavne pozive nezavisno od vrste drajvera, a ti pozivi se preslikavaju na operacije specifične za svaki drajver koje deluju na pravom hardveru. Drajveri su oraganizovani kao moduli kernela tako da se razvijaju odvojeno i mogu se uključiti u kernel po potrebi. Moduli po učitavanju postaju deo kernela tako da imaju pristup \texttt{kernel space}-u a komunicijaru sa \texttt{user space}-om preko određenog interfejsa.
 
-Sistemski fajlovi koje pravi drajver i njihov opis:
+\subsubsection{Linux Device Model}
+Linux Device Model je novi standard koji uvodi apstrakcije o sastavu sistema. Pre ovoga nije postojala jedna struktura koja opisuje način na koji je sistem sastavljen. Ove apstakcije izdvajaju sličnosti uređaja i grupišu ih nezavisno od specifične implementacije. Linux Device Model nudi podršku za različite zadatke kao što su: upravljanje potrošnjom, komunikacija sa \texttt{user space}-om, priključivanje uređaja tokom rada (\textit{hotplud, plug-n-play}), podela urešaja u klase. Bitne komponente Linux Device Model-a su udev, sysfs, kobject i klase uređaja.
+
+\texttt{sysfs} je virtuelni fajl sistem koji pruža interfejs ka strukturama kernela. Ovaj fajl sistem prikazuje strukturu Linux Device Model-a  i se obično nalazi u folderu \texttt{sys}.  Fajlovi u \texttt{sysfs}  pružaju informacije o uređajima, modulima kernela, fajl sistemima i drugim komponentama kernela. Većina fajlova može samo da se čita kako bi se dobile informacije o kernelu, dok su neki namanjeni i za upis što dozvoljava izmene u kernelu. Kako bi se izbegla redudantnost dosta se koristi simboličko linkovanje, pri čemu jedan fajl predsavlja samo link ka mestu gde se taj fajl zapravo nalalzi. Svaki fajl zasnovan je na strukturi \texttt{kobject} koja nudi neke opšte osobine koje se koriste kod svih objekata.  \texttt{kobject} se retko koristi sam po sebi već je obično deo neke veće strukture i samim tim se i operacije sa  \texttt{kobject}-om kriju iza programerskog interfejsa. 
+
+Kao što je pomenuto, svi uređaji su predstavljeni kao jedan fajl u folderu \texttt{dev}. \texttt{udev} ima zadatak da dodaje uređaje u ovaj folder. \texttt{udev} se oslanja na informacije iz \texttt{sysfs}.
+
+Klase uređaja grupišu uređaje po funkcionalnosti a ne prema načinu povezivanja i implementacije. Unutar foldera \texttt{class} se nalaze klase koje grupišu uređaje u terminale, mrežne uređaje, grafičke uređaje, zvučne urešaje itd. U ovim folderima se nalaze simobličke veze ka unosima u folderu \texttt{devices} u kojem se nalazi opis Device Tree kernela. 
+
+\subsubsection{Implementacija drajvera}
+
+Drajver je napisan kao modul kernela. Drajver pripada \texttt{platform} magistrali. Ovo je pseudo magistrala minimalne infrastrukture koja se koristi za memorijski mapirane uređaje kojima se može pristupiti direktno preko magistrale procesora. Ova magistrala je uobičajeni izbor za namenske sisteme, pogotovo kada se implementira drajver za neku posebnu namenu kao što je FPGA periferija u slučaju ovog rada. Implementirani \textit{platform} drajver se koristi za dohvatanje informacija o uređaju iz Device Tree strukture, za registrovanje prekidne rutine i za stvaranje \texttt{sysfs} fajlova koji korisniku pružaju jednosavan interfejs prema hardveru.
+
+\subsubsection*{modul kenrela}
+Važni delovi svakog modula kernela su:
 \begin{itemize}
-\item \texttt{leds} - upisani broj se prikazuje na LE diodama u binarnoj predstavi
-\item \texttt{keys} - čitanje vraća binarnu predstavu stanja tastera
+\item makro definicije za osnovne informacije o modulu kao što su ime autora, opis, licenca, verzija modula
+\item \{init} funkcija koja se izvršava pri učitavanju modula u kernel
+\item \{exit} funkcija koja se izvršava pri uklanjanju modula iz kernela
+\end{itemize}
+
+U funkcijama \{init} i \{exit} se pozivaju funkcije sa registrovanje \textit{platform} drajvera.
+
+\subsubsection*{Platform drajver}
+Platform drajver se definiše jednostavnom strukturom čija su polja:
+\begin{itemize}
+\item \texttt{probe} - pokazivač na funkciju koja će biti pozvana pri uspešnom registrovanju drajvera
+\item \texttt{remove} - pokazivač na funkciju koja će biti pozvana pri uklanjanju drajvera
+\item \texttt{driver} - sadrži informacije o imenu drajvera i pokazivač na \texttt{of_device_id} koja identifikuje drajver u Device Tree na osnovu \texttt{compatible} polja (neophodno je da se vrednosti definisane u drajveru i u Device Tree poklope kako bi se uspešno registrovao drajver)
+\end{itemize}
+
+Funkcije \texttt{probe} i \texttt{remove} se koriste za dohvatanje informacija iz Device Tree i potrebna podešavanja:
+\begin{itemize}
+\item dohvataju se adresa početka i dužina memorijskog opsega periferije pozivom funkcije \texttt{platform_get_resource} i zatim se taj opseg mapira pozivom funkcije \texttt{ioremap}
+\item dohvata se broj prekida pozivom funckije \texttt{get_platform_irq} i zatim se registruje prekidna rutina pozivom funkcije \texttt{requset_irq}
+\end{itemize}
+
+Dalje se prave \texttt{sysfs} fajlovi.
+
+\subsubsection*{sysfs fajlovi}
+\texttt{sysfs} se koristi kao jednostavan intefrejs prema \texttt{user space}-u. Stvaranje fajlova se u drajveru svodi na jednostavno pisaje funkcija \texttt{.show} za čitanje i \texttt{.store} za upis. Ovim izborom se postiže jednostavno pisanje drajvera sa jednostavnim programerskim intefrejsom, dok su alternativni načini bili pisanje \texttt{char} drajvera, stvaranja unosa u klasu uređaja ili upotreba nekog standardnog \texttt{framework}-a za ovu konkretnu primenu kao što je GPIO, LED.
+
+Stvoreni fajlovi se pojavljuju u folderi koji je se nalazi u {/sys/bus/platform/driver/lddipldrv}. Sistemski fajlovi koje pravi drajver i njihov opis:
+\begin{itemize}
+\item \texttt{leds} - broj upisan u ovaj fajl se prikazuje na LE diodama u binarnoj predstavi
+\item \texttt{keys} - čitanje iz ovog fajla vraća binarnu predstavu stanja tastera
 \item \texttt{irq\_flag} - pristup registru za flegove prekida (1 na n-tom bitu označava pristigli prekid na n-tom tasteru, upis 1 na n-ti bit čisti n-ti fleg)
 \item \texttt{irq\_mask} - čitanje i upis u registar za maksiranje prekida (upis 1 na n-ti bit omogućava prekid na n-tom tasteru)
 \end{itemize}
 
-Ceo kod drajvera je dostupan u dodatku.
+Ovi fajlovi se mapiraju u pozive funkcija koje ivršavaju jednostavne upise i čitanje u registre. Za detalje o radu drajvera pogledati ceo kod drajvera koji je dostupan u dodatku.
 \subsection*{Testiranje sistema}
 Binarni fajlovi za pokretanje sistema i root fajl sistem su napisani na SD karticu. HPS je povezan sa PC računarom preko UART-USB serijske veze. Otvaranjem konzole na PC računaru se pristupa sistemu.\\
 U nastavku je dat komplatan spisak koraka za realizovanje sistema.
