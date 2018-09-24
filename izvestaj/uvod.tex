@@ -1,5 +1,5 @@
 \section{Uvod}
-U ovom radu je na DE1-SoC razvojnom sistemu implementiran jednostavan hardver u FPGA, portovan je Linuks operativni sistem i napisan je drajver za pristup registrima i prihvatanje prekida iz FPGA. \cite{latexcompanion}
+U ovom radu je na DE1-SoC razvojnom sistemu implementiran jednostavan hardver u FPGA, portovan je Linuks operativni sistem i napisan je drajver za pristup registrima i prihvatanje prekida iz FPGA.
 
 \subsection{Sistemi na čipu sa FPGA}
 Sa sve većim mogućnostima namenskih sistema došlo je do popularizacije sistema na čipovima (SoC - \textit{System on Chip}) koji integrišu mikroprocesore sa više jezgara, memorije na čipu, mnogobrojne periferije i transivere, kao i FPGA (\textit{Field Programmable Gate Array}).
@@ -16,7 +16,7 @@ Hardver u FPGA se projektuje upotrebom nekog od dva popularna jezika za opis har
 
 U ovom radu korišćen je DE1-SoC razvojni sistem koji se vrlo često upotrebljava u edukativne svrhe. Razvojni sistem je zasnovan na čipu iz familije Cyclone V kompanije Intel (ranije Altera).
 
-U nastavku su navedene samo osobine razvojnog sistema koje se tiču ovog rada, a detaljniji opis se moze pronaći u dokumentu zvaničnoj dokumentaciji proizvođača []
+U nastavku su navedene samo osobine razvojnog sistema koje se tiču ovog rada, a detaljniji opis se moze pronaći u dokumentu zvaničnoj dokumentaciji proizvođača \cite{de1}
 dodati referencu: 
 \begin{itemize}
 \item Sistem na čipu Cyclone V \texttt{5CSEMA5F31}
@@ -29,12 +29,12 @@ dodati referencu:
 \end{itemize}
 
 \subsection{Opis Altera Cyclone 5}
-Altera Cyclone V je SoC FPGA koji se sastoji od dva dela(slika): procesorski deo (HPS -  \textit{Hard processor System}) i programabilni FGPA deo. HPS se sastoji od MPU (\textit{Microprocessor unit}) sa ARM Cortex-A9 MPCore sa dva jezgra i sledećih modula: kontroleri memorije, memorije, periferije, sistem interkonekcije, debug moduli, PLL moduli. FPGA deo se sastoji od sledećih delova: FPGA programabilna logika (\textit{look-up} tabele, RAM memorije, mnozači i rutiranje), kontrolni blok, PLL, kontroler memorije.
+Altera Cyclone V je SoC FPGA koji se sastoji od dva dela: procesorski deo (HPS -  \textit{Hard processor System}) i programabilni FGPA deo. HPS se sastoji od MPU (\textit{Microprocessor unit}) sa ARM Cortex-A9 MPCore sa dva jezgra i sledećih modula: kontroleri memorije, memorije, periferije, sistem interkonekcije, debug moduli, PLL moduli. FPGA deo se sastoji od sledećih delova: FPGA programabilna logika (\textit{look-up} tabele, RAM memorije, mnozači i rutiranje), kontrolni blok, PLL, kontroler memorije.
 
 Svaki pin kućista je povezan na samo jedan od ova dva dela sistema, tako da HPS deo i FPGA deo ne mogu međusobno razmenjivati pinove.
 
 \subsubsection{Konfigurisanje FPGA i pokretanje HPS}
-Pri pokretanju HPS (boot) može da učita program iz FPGA dela, iz eksterne \textit{flash} memorije ili preko JTAG. FPGA ima mogućnost da se konfiguriše softverski iz HPS korišćenjem periferije FPGA Manager ili spoljnim programatorom. Kombinacije ovih mogucnosti daju nekoliko scenarija:
+Pri pokretanju HPS (\textit{boot}) može da učita program iz FPGA dela, iz eksterne \textit{flash} memorije ili preko JTAG. FPGA ima mogućnost da se konfiguriše softverski iz HPS korišćenjem periferije \textit{FPGA Manager} ili spoljnim programatorom. Kombinacije ovih mogucnosti daju nekoliko scenarija:
 \begin{itemize}
 \item nezavisno konfigurisanje FPGA i pokretanje HPS
 \item konfigurisanje FPGA, zatim pokretanje HPS iz memorije koja se nalazi u FPGA
@@ -213,7 +213,7 @@ Neke od vaznih osobina u čvoru su:
 \item \texttt{\#interrupt-cells} - određuje koliko 32-bitnih ćelija se koristi za opis \texttt{interrupts} polja u uređajima koji koriste kontroler prekida
 \end{itemize}
 
-U nastavku(premestiti u dodatak?) je na primeru dat pojednostavljeni \textit{Device Tree Source} koji opisuje DE1-SoC razvojni sistem. Na osnovu prethodnog teksta se lako može razumeti organizacija i sastav sistema. Dati primer je pojednostavljen tek toliko što su izostavljeni uređaji sistama na čipu čiji rad se ne izučava u ovom radu. Ceo \textit{Device Tree} je podeljen u nekoliko fajlova i može se pronaći u dodatku ovog rada i literaturi[]socfpga\_cyclone5\_socdk.dts socfpga\_cyclone5.dtsi socfpga.dtsi Iz priloženog koda se vidi da se sistem sastoji od:
+U nastavku(premestiti u dodatak?) je na primeru dat pojednostavljeni \textit{Device Tree Source} koji opisuje DE1-SoC razvojni sistem. Na osnovu prethodnog teksta se lako može razumeti organizacija i sastav sistema. Dati primer je pojednostavljen tek toliko što su izostavljeni uređaji sistama na čipu čiji rad se ne izučava u ovom radu. Ceo \textit{Device Tree} je podeljen u nekoliko fajlova i može se pronaći u dodatku ovog rada i literaturi\cite{dts}. Iz priloženog koda se vidi da se sistem sastoji od:
 \begin{itemize}
 \item dva procesorska jezgra Cortex-A9
 \item standardni ulazno/izlazni uređaj je serijski uređaj \texttt{serial0}
@@ -286,34 +286,34 @@ Kada je \textit{Device Tree Source} napisan potrebno je smestiti \texttt{.dts} f
 Potrebno je napomenuti da je u ovom radu modifikovan \textit{Device Tree} za razvojni sistem \textit{Cyclone V Develompent Kit} koji je veoma sličan DE1-SoC. Uvedene modifikacije se svode na isključivanje CAN uređaja koji Cyclone V \textit{Develompent Kit} ima a DE1-SoC nema. Zatim je dodat opis implementiranih PIO Intel FPGA IP u FPGA. Drugi način dobijanja \textit{Device Tree} koji nije zahtevao ručnu modifikaciju je korišćenje \textit{Device Tree Generator}-a koji je dostupan u okviru \textit{Altera Embedded Develompment Suite} paketa softverskih alata. Za ovaj način je testiranjem utvrđeno da postoji sledeći problem: drajver ne vidi uređaje koji pripadaju čvoru \texttt{bridge} koji opisuje adresni prostor između FPGA i HPS i samim tim i generisani hardver u FPGA. Najverovatniji razlog ovom problemu je različita verzija kernela od one za koju je alat namenjen, ali je u skladu sa edukativnim ciljem ovog rada izabran put ručnog pisanja \textit{Device Tree} umesto korišćenja generisanog.
 
 \subsection{Linuks kernel}
-Linuks kernel centralni deo operativnog sistema koji ima zadatak da upravlja resursima sistema i pruži interfejs prema hardveru. Linuks kernel je \textit{open-source} projekat koji održava i razvija veliki broj programera i kompanija. Izvorni kod je otvoren što omogućava prilagođavanje za različite platforme kao i privlači razvoj raznih kompatibilnih projekata. Ova osobina čini Linuks veoma popularnim u namenskim sistemima. Prednosti su portabilnost i hardverska porška koju pruža zajednica i proizvođači. Kernel je skalabilan pa se može konfigurisati za izvršavanje na super-računarima kao i na malim uređajima sa čak 4MB RAM memorije. Takođe, Linuks nudi gotove implementacije raznih delova sistema koji su potrebni za povezivanje i bezbednost.
+Linuks kernel centralni deo operativnog sistema koji ima zadatak da upravlja resursima sistema i pruži interfejs prema hardveru. Linuks kernel je \textit{open-source} projekat koji održava i razvija veliki broj programera i kompanija. Izvorni kod je otvoren što omogućava prilagođavanje za različite platforme i privlači razvoj raznih kompatibilnih projekata. Ova osobina čini Linuks veoma popularnim u namenskim sistemima. Prednosti su portabilnost i hardverska porška koju pruža zajednica i proizvođači. Kernel je skalabilan pa se može konfigurisati za izvršavanje na super-računarima kao i na malim uređajima sa tek 4MB RAM memorije. Takođe, Linuks nudi gotove implementacije raznih delova sistema koji su potrebni za povezivanje i bezbednost.
 
-Glavne uloge kernela su da upravlja harverskim resursima procesorom, memorijom i ulazno/izlaznim uređajima. Iz ugla razvoja softvera kenrel nudi standardizovani interfejs (API Application Programming Interface) koji je portabilan i nezavistan od arhitekture i specifičnog hardvera. Ovaj interfejs nudi korisne apstrakcije koje su prikazane na slici \ref{slika1:linux1}
+Glavne uloge kernela su da upravlja harverskim resursima procesorom, memorijom i ulazno/izlaznim uređajima. Iz ugla razvoja softvera kenrel nudi standardizovani interfejs (API Application Programming Interface) koji je portabilan i nezavistan od arhitekture i specifičnog hardvera. Ovaj interfejs nudi korisne apstrakcije koje su prikazane na slici \ref{slika1:linux1}.\\
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.5]{img/linux1.png}
-\caption{Tok pokretana sistema}
-\label{slika1:linux1dd}
+\caption{Organizacija linuksa}
+\label{slika1:linux1}
 \end{figure}
-Korisničke aplikacije se izvršavaju u neprivilegovanom režimu i uglavnom pozivaju standardnu C biblioteku. C biblioteka se obraća kernelu preko sistemskih poziva, a implementacija sistemskih poziva je različita u zavisnosti od arhitekture sistema. Drajveri uređaja pružaju interfejs prema hardveru i biće detalnije objašnjeni kasnije.
+Korisničke aplikacije uglavnom pozivaju standardnu C biblioteku. C biblioteka se obraća kernelu preko sistemskih poziva, a implementacija sistemskih poziva je različita u zavisnosti od arhitekture sistema. Drajveri uređaja pružaju interfejs prema hardveru i biće detalnije objašnjeni kasnije.
 
-Jedna od osnovnih odlika Linuks kernela je podela sistema na privilegovani \textit{kernel-space} deo i na neprivilegovani \textit{user-space} deo. U privilegovanom režimu kernel ima pristup zaštićenom delu memorije i slobodan pristup hardveru. \textit{User-space} je namenjen za aplikacije kojima je dozvoljen ograničen pristup određenim resursima. Međutim, jedna od korisnih mogućnosti za namenske sisteme koja se nudi u \textit{user-space}-u je pristup memorijskom prostoru u kojem se nalaze periferije. Ovo se postiže mapiranjem memorijskog prostora u virtuelnu adresu. Ovaj način pristupa registrima je zgodan jer je brz i jednostavan, a u nekim slučajevima je dovoljan za rešavanje datog problema. Veliki nedostatak ovog pristupa je što ne postoji način da se registruju prekidne rutine.
+Jedna od osnovnih odlika Linuks kernela je podela sistema na privilegovani \textit{kernel-space} deo i na neprivilegovani \textit{user-space} deo. U privilegovanom režimu kernel ima pristup zaštićenom delu memorije i slobodan pristup hardveru. \textit{User-space} je namenjen za aplikacije kojima je dozvoljen ograničen pristup određenim resursima. Međutim, jedna od korisnih mogućnosti za namenske sisteme dostupna u \textit{user-space}-u je pristup memorijskom prostoru u kojem se nalaze periferije. Ovo se postiže mapiranjem memorijskog prostora u virtuelnu adresu. Ovaj način pristupa registrima je zgodan jer je brz i jednostavan, a u nekim slučajevima je dovoljan za rešavanje datog problema \cite{mmap}. Veliki nedostatak ovog pristupa je što ne postoji način da se registruju prekidne rutine.
 
-U ovom radu korišćena je verzija 4.6 Linuks kernela dostupna na \texttt{git} repozitorijumu kompanije Altera []https://github.com/altera-opensource/linux-socfpga. Verzije kernela koje obezbeđuju proizvođači su modifikovane za podržane platforme tako što su dodate konfiguracije i drajveri. Veći proizvođači vremenom unete izmene unesu i u glavnu verziju kernela. U ovom radu je korišćena Alterina verzija jer se preporučuje prema zvaničnim uputstvima.
+U ovom radu korišćena je verzija 4.6 Linuks kernela dostupna na \texttt{git} repozitorijumu kompanije Altera. Verzije kernela koje obezbeđuju proizvođači su modifikovane za podržane platforme tako što su dodate konfiguracije i drajveri. Veći proizvođači vremenom unete izmene unesu i u glavnu verziju kernela. U ovom radu je korišćena Alterina verzija jer se preporučuje prema zvaničnim uputstvima.
 
 Po preuzimanju izvornog koda vrši se konfiguracija upotrebom podrazumevanog konfiguracionog fajla za Alterine sisteme na čipu. Konfiguracija se izvršava komandom \texttt{make socfpga\_defconfig}. Nakon toga se pokreće kompajliranje kernela komandom \texttt{make zImage}. U folder \texttt{arch/arm/boot} se nalazi izvršni fajl \texttt{zImage} koji je spreman za prebacivanje na SD karticu.
 \subsection{Root fajl sistem}
-\textit{Root} fajl sistem je neophodan deo operativnog sistema. \textit{Root} označaca koren fajl sistema i psotavlja se na nekom fajl sistemu koji se nalazi na trajnoj memoriji. Struktura \textit{root} fajl sistema je definisana standardnom []https://wiki.linuxfoundation.org/lsb/fhs koji definiše strukturu i nazive fodlera kao i njihovu namenu. Neophodne je da sa na definisanim mestima u \textit{root} fajl sistemu nalaze sva potrebna podešavanja za ispravno pokretanje kernela, kao i korisničke aplikacije koje nude od osnovne funkcionalnosti sistema do kompleksnih i velikih aplikacija.
+\textit{Root} fajl sistem je neophodan deo operativnog sistema. \textit{Root} označaca koren fajl sistema i postavlja se na nekom fajl sistemu koji se nalazi na trajnoj memoriji. Struktura \textit{root} fajl sistema je uređena standardnom \cite{fhs} koji definiše strukturu i nazive fodlera kao i njihovu namenu. Neophodno je da sa na definisanim mestima u \textit{root} fajl sistemu nalaze sva potrebna podešavanja za ispravno pokretanje kernela, kao i korisničke aplikacije koje implementiraju veoma koriste funkcionalnosti sistema.
 
-U nekim delovima \textit{root} fajl sistema se nalaze virtuelni fajl sistemi koji nude organizovanu reprezentaciju kernela. Neki od ovih virtuelnih fajl sistema nude korisne mogućnosti kao što je modifikacija parametara kernela. Za ovaj rad je važno pomenuti folder \texttt{dev} u kojem se nalaze svi uređaji na sistemu predstavljeni kao fajlovi i folder \texttt{sys} koji će detaljnije biti opisan kasije.
+U nekim delovima \textit{root} fajl sistema se nalaze virtuelni fajl sistemi koji nude organizovanu reprezentaciju struktura podataka kernela. Neki od ovih virtuelnih fajl sistema nude korisne mogućnosti kao što je modifikacija parametara kernela. Za ovaj rad je važno pomenuti folder \texttt{dev} u kojem se nalaze svi uređaji na sistemu predstavljeni kao fajlovi i folder \texttt{sys} koji će detaljnije biti opisan kasije.
 
-\textit{Root} fajl sistem može da se nabavi kao gotov ili da se pravi ručno. Prednosti gotovog \textit{root} fajl sistema je lako korišćenje ali dolazi sa manama jer se teško prilagođavaju konkretnoj primeni i omptimizuju, a često su veoma veliki. Ručno pravljenje omogućava potpunu kontrolu i dobru priliku da se nauči dosta o samom radu operativnog sistema, ali to može postati kompleksan zadatak ukoliko je potrebno brzo i pouzdano pokrenuti sistem.
+\textit{Root} fajl sistem može da se nabavi kao gotov ili da se pravi ručno. Prednosti gotovog \textit{root} fajl sistema je lako korišćenje ali dolazi sa manama jer se teško optimizuje i prilagođava konkretnoj primeni, a često je i veličina problem. Ručno pravljenje omogućava potpunu kontrolu i dobru priliku da se nauči dosta o samom radu operativnog sistema, ali to može postati kompleksan zadatak ukoliko je potrebno brzo i pouzdano pokrenuti sistem.
 
 \textit{Open-source} zajednica nudi različita rešenja za automatizaciju pravljenja \textit{root} fajl sistema. Dva najveća projekta su Yocto/OpenEmbedded i Buldroot. Yocto/OpenEmbedded je veliki projekat koji unosi apstrakcije i generalizacije sa ciljem da generiše kompletnu distribuciju Linuks operativnog sistema i lako podrži različite platforme. Za jednostavnije sisteme za koje je potrebno generisati samo jednostavan \textit{root} fajl sistem se koristi Buildroot.
 
 Buildroot takođe nudi generisanje izvršnih fajova kernela i \textit{bootloader}-a. Buildroot koristi poznati \texttt{make} sistem za konfiguraciju, samim tim je jednostavan za korišćenje i modifikovanje prema nameni. Ovo čini Bulidroot veoma popularnim u namenskim sistemima.
 
-U ovom radu je demonstirana primena Buldroot-a za generisanje \textit{root} fajl sistema dok su Linuks kernel i \texttt{bootloader} ručno preuzeti i kompajlirani. Buildroot se konfiguriše unosom informacija o sistemu: podešeni su detalji arhitekture u skladu sa razvojnim sistemom i podešena je putanja ka eksternom Linaro \textit{toolchain}-u. Nakon toga se naredbom \texttt{make} za kratko vreme dobija arhiviarni fajl koji je spreman za otpakivanje na SD karticu.
+U ovom radu je demonstirana primena Buldroot-a za generisanje \textit{root} fajl sistema dok su Linuks kernel i \texttt{bootloader} ručno preuzeti i kompajlirani. Buildroot se konfiguriše unosom informacija o sistemu: podešeni su detalji arhitekture u skladu sa razvojnim sistemom i podešena je putanja ka eksternom Linaro \textit{toolchain}-u. U konfiguraciji je moguće uključiti veliki broj dostupnih projekata što je velika prednost Buildroota. Po podrazumevanim podešavanjima uključen je Barebox koji je minimalna implementacija velikog broja uobičajenih korisnih programa za Linuks. Nakon toga se naredbom \texttt{make} za kratko vreme dobija arhiviarni fajl koji je spreman za otpakivanje na SD karticu.
 
 \subsection{Drajver}
 Drajver imaju specijalnu ulogu u Linuks kernelu. Drajver je deo sistema koji obezbeđuje da deo hardvera radi na očekivani način preko jednostavno definisanog programerskog interfejsa, pri čemu se krije kompleksnost detalja rada hardvera. Korisničke aktivnosti se svode na jednostavne pozive nezavisno od vrste drajvera, a ti pozivi se preslikavaju na operacije specifične za svaki drajver koje deluju na pravom hardveru. Drajveri su oraganizovani kao moduli kernela tako da se razvijaju odvojeno i mogu se uključiti u kernel po potrebi. Moduli po učitavanju postaju deo kernela tako da imaju pristup \texttt{kernel space}-u a komunicijaru sa \texttt{user space}-om preko određenog interfejsa.
@@ -410,21 +410,21 @@ Na ploči razvojnog sistema je potrebno podesiti prekidače koji određuju da se
 Sistem povezati na PC računar USB kablom i otvoriti terminal za komunikaciju.
 
 Nakon uključivanja sistema u terminalu će početi ispisivanje sistemskih obaveštenja koja su uobičajena pri pokretanju sistema. Nakon toga biće zatraženo ime korisnika i lozinka. Po unosu ovih informacija dobija se pristup linuks sistemu. Za učitavanje drajvera koristi se komanda \texttt{insmod}. Nakon učitavanja u folderu \texttt{sys/bus/platform/driver/lddipldrv} se pojavljuju sistemski fajlovi za pristup hardveru. Korišćenjem komande za upis u fajl \texttt{leds} se može upisati vrednost koja će se pojaviti na LE diodama. U primeru na slici \ref{slika1:test1} je upisan broj \texttt{10} (binarno \texttt{1010}) i to je ispisano na LE diodama \ref{slika1:test2}.
-\ref{slika1:linux1}
-\begin{figure}[h!]
+\ref{slika1:test1}
+\begin{figure}[h]
 \centering
 \includegraphics[scale=0.5]{img/test1.png}
 \caption{Korišćenje drajvera za uključivanje LE dioda}
 \label{slika1:de1}
 \end{figure}
-\begin{figure}[h!]
+\begin{figure}[h]
 \centering
 \includegraphics[scale=0.1]{img/test2.png}
 \caption{Razvojni sistem DE1-SoC povezan za testiranje}
-\label{slika1:de1}
+\label{slika1:test2}
 \end{figure}
 Za demonstraciju pristizanja prekidne rutine je potrebno dozvoliti prekida na tasteru \texttt{1} upisom u sistemski fajl \texttt{irq\_mask}. Nakon pritiskanja tastera na razvojnom sistemu u konzoli se pojavlju obaveštenje koje ispisuje prekidna rutina drajvera \ref{slika1:test3}\\
-\begin{figure}[h!]
+\begin{figure}[h]
 \centering
 \includegraphics[scale=0.5]{img/test3.png}
 \caption{Dozvola prekida i pristizanje prekidne rutine}
