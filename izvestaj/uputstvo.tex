@@ -1,9 +1,9 @@
 \newcommand\tab[1][1cm]{\hspace*{#1}}
-\section{Uputstvo za repliciranje rezultata}
+\subsection{Uputstvo za repliciranje rezultata}
 
 \begin{enumerate}
 
-\subsection{Projektovanje u Quartus-u}
+\subsubsection{Projektovanje u Quartus-u}
 \item U \texttt{Microsoft Windows} operativnom sistemu pokrenuti \texttt{DE1SoC\_SystemBuilder.exe} (dostupan na [])
 \item Izabrati konfiguraciju kao na slici \ref{slika:sb} i izabrati Generate\\
 \begin{figure}[h!]
@@ -180,7 +180,7 @@ Ovim su podešavanja HPS modula završena, izabrati \texttt{Finish}.
  Izabrati \texttt{hps\_sdram\_p0\_pin\_assignments.tcl} i kliknuti Run. Ukoliko dođe do grešaka proveriti da li je izvršen prethodni korak.
 \item  Pokrenuti kompajliranje projekta izborom \texttt{Processing > Start Compilation}
 
-\subsection{Podešavanja okruženja i preuzimanje kompajlera}
+\subsubsection{Podešavanja okruženja i preuzimanje kompajlera}
 \item Preuzeti arhivu sa Linaro toolchain-om\\
 \texttt{wget https://releases.linaro.org/components/toolchain/binaries/7.2-2017.11/\\arm-linux-gnueabihf/gcc-linaro-7.2.1-2017.11-x86\_64\_arm-linux-gnueabihf.tar.xz}
 \item Otpakovati preuzeti toolchain:\\
@@ -196,9 +196,9 @@ Ovim su podešavanja HPS modula završena, izabrati \texttt{Finish}.
 \item Dodati putanju za Quartus alate u promenljivu okruženja \texttt{PATH}:\\
 \texttt{export PATH=\textasciitilde/intelFPGA\_lite/18.0/quartus/bin/:\$PATH}
 
-\subsection{Generisanje RBF fajla}
+\subsubsection{Generisanje RBF fajla}
 \item \texttt{quartus\_cpf -c -o bitstream\_compression=on \textbackslash \\ \textasciitilde/ld\_dipl/hw/ld\_dipl.sof \textbackslash \\ \textasciitilde/ld\_dipl/sdcard/fat32/socfpga.rbf}
-\subsection{Generisanje i kompajliranje Preloader-a}
+\subsubsection{Generisanje i kompajliranje Preloader-a}
 \item Pokrenuti Preloader generator komadnom:\\ \texttt{bsp-editor}
 \item Izabrati \texttt{File > New HPS BSP...}
 \item U novom prozoru podesiti \texttt{Preloader Settings Directory:} \\ \texttt{ \textasciitilde/ld\_dipl/hw/hps\_isw\_handoff/ld\_dipl\_system\_hps\_0}
@@ -216,11 +216,11 @@ Ovim su podešavanja HPS modula završena, izabrati \texttt{Finish}.
 \item Kopirati kompajlirani Preloader:
 \texttt{cp \textasciitilde/ld\_dipl/sw/preloader/preloader-mkpimage.bin \textasciitilde/ld\_dipl/sdcard/a2/}\\
 
-\subsection{Generisanje Device Tree}
+\subsubsection{Generisanje Device Tree}
 \item Uporebom Alterinog alata generisati \texttt{Device Tree} komandom: \\
 \texttt{sopc2dts -i ~/ld\_dipl/hw/ld\_dipl\_system.sopcinfo \\-o ~/ld\_dipl/hw/ld\_dipl\_generated.dts}
 
-\subsection{U-Boot}
+\subsubsection{U-Boot}
 \item Preuzeti izvorni kod projekta U-boot komandom\\ \texttt{git clone git://git.denx.de/u-boot.git \textasciitilde/ld\_dipl/sw/u-boot}
 \item Promeniti radni direktorijum\\ \texttt{\textasciitilde/ld\_dipl/sw/u-boot/}
 \item Napraviti novu granu na osnovu verzije v2018.01 komandom:\\ \texttt{git checkout v2018.01 -b tmp}
@@ -257,7 +257,7 @@ U ovom fajlu je potrebno napisati skriptu za U-Boot. Ranije u radu je dato obja�
 \item Kopirati kompajlirani U-Boot\\
 \texttt{cp \textasciitilde/ld\_dipl/sw/u-boot/u-boot.scr \textasciitilde/ld\_dipl/sdcard/fat32/u-boot.scr }
 
-\subsection{Linuks kernel}
+\subsubsection{Linuks kernel}
 \item Preuzeti izvorni kod Linuks kernela:\\
 \texttt{git clone git://github.com/torvalds/linux \textasciitilde/ld\_dipl/sw/linux}
 \item Promeniti radni direktorijum\\
@@ -288,7 +288,7 @@ U ovom fajlu je potrebno napisati skriptu za U-Boot. Ranije u radu je dato obja�
 \texttt{cp \textasciitilde/ld\_dipl/sw/linux/arch/arm/boot/dts/socfpga\_cyclone5\_ld\_dipl.dtb \\ \textasciitilde/ld\_dipl/sdcard/fat32/socfpga.dtb }
 
 
-\subsection{Kompajliranje drajvera}
+\subsubsection{Kompajliranje drajvera}
 \item Promeniti radni folder\\
 \texttt{cd \textasciitilde/ld\_dipl/sw/device\_driver}\\
 U ovom folderu se nalazi izvorni fajl drajvera \texttt{ld\_dipl.c} i odgovarajući \texttt{Makefile}
@@ -299,7 +299,7 @@ U ovom folderu se nalazi izvorni fajl drajvera \texttt{ld\_dipl.c} i odgovaraju�
 \item Kopirati kompajlirani drajver u pripremni direktorijum\\
 \texttt{cp \textasciitilde/ld\_dipl/sw/device\_driver/ld\_dipl.ko \textasciitilde/ld\_dipl/sdcard/ld\_dipl.ko }
 
-\subsection{Generisanje Root File System}
+\subsubsection{Generisanje Root File System}
 \item Preuziti \texttt{Buildroot}
 \texttt{git clone git://git.busybox.net/buildroot \textasciitilde/ld\_dipl/sw/buildroot}
 \item Promeniti radni folder\\
@@ -333,7 +333,7 @@ U ovom folderu se nalazi izvorni fajl drajvera \texttt{ld\_dipl.c} i odgovaraju�
 \item Kopirati fajl sistem u pripremni direktorijum\\
 \texttt{cp \textasciitilde/ld\_dipl/sw/buildroot/output/images/rootfs.tar \textasciitilde/ld\_dipl/sdcard/rootfs.tar }
 
-\subsection{Priprema SD kartice}
+\subsubsection{Priprema SD kartice}
 \item Ubaciti SD karticu u računar. Zaključiti pod kojim imenom se kartica pojavila u sistemskom folderu \texttt{/dev} (za primer je uzeto \texttt{/dev/sdx} )
 \item Formatirati SD karticu komandom\\
 \texttt{sudo dd if=/dev/zero of=/dev/sdx bs=512 count=1}
@@ -375,7 +375,7 @@ sudo mount /dev/sdx2 \textasciitilde/ld\_dipl/sdcard/mountext3
 \texttt{umount \textasciitilde/ld\_dipl/sdcard/mountfat32
 umount \textasciitilde/ld\_dipl/sdcard/mountext3}
 
-\subsection{Testiranje sistema}
+\subsubsection{Testiranje sistema}
 \item Proverti da li su \texttt{MSEL} podešeni za konfigurisanje FPGA sa HSP (ima negde lepa slika)
 \item Pruključiti DE1-SoC na napajanje
 \item Povezati Mini USB kablom PC računar i port na DE1-SoC ploči koji je obležen sa UART
@@ -395,10 +395,8 @@ umount \textasciitilde/ld\_dipl/sdcard/mountext3}
 Password:root}
 \item Učitati modul drajvera u linuks kernel komandom:\\
 \texttt{insmod /root/home/ld\_dipl.ko}
-\item Uveriti se da su se pojavili odgovarajući sistemski fajlovi:\\
-\texttt{ls /sys/bus/platform/...}
-\item Uključiti LE diode\\slika
-\item Uključiti prekida\\slika
-
-
+\item Promeniti radni direktorijum:\\
+\texttt{cd /sys/bus/platform/}
+\item Uveriti se da su se pojavili sistemski fajlovi komandom \texttt{ls}
+\item Uključiti LE diode upisom u fajl \texttt{leds} i omogućiti pristizanje prekidnog zahteva upisom u fajl \texttt{irq\_mask}
 \end{enumerate}

@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.9.10)  21 SEP 2018 23:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.9.24)  24 SEP 2018 21:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **ld140082_diplomski_izvestaj.tex
 (./ld140082_diplomski_izvestaj.tex
 LaTeX2e <2016/02/01>
-Babel <3.9q> and hyphenation patterns for 5 language(s) loaded.
+Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
@@ -23,6 +23,23 @@ File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
+(/usr/share/texlive/texmf-dist/tex/latex/preprint/fullpage.sty
+Package: fullpage 1999/02/23 1.1 (PWD)
+\FP@margin=\skip43
+)
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2016/02/24 3.9q The Babel package
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel-serbian/serbian.ldf
+Language: serbian 2005/03/31 v1.0d Serbocroatian support from the babel system
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2016/02/24 3.9q Babel common definitions
+\babel@savecnt=\count87
+\U@D=\dimen103
+)
+Package babel Info: Making " an active character on input line 73.
+))
 (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2015/03/17 v1.2c Input encoding file
 \inpenc@prehook=\toks14
@@ -333,25 +350,6 @@ Now handling font encoding U ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
 ))
-(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2016/02/24 3.9q The Babel package
-
-(/usr/share/texlive/texmf-dist/tex/generic/babel-english/english.ldf
-Language: english 2012/08/20 v3.3p English support from the babel system
-
-(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
-File: babel.def 2016/02/24 3.9q Babel common definitions
-\babel@savecnt=\count87
-\U@D=\dimen103
-)
-\l@canadian = a dialect from \language\l@american 
-\l@australian = a dialect from \language\l@british 
-\l@newzealand = a dialect from \language\l@british 
-))
-(/usr/share/texlive/texmf-dist/tex/latex/preprint/fullpage.sty
-Package: fullpage 1999/02/23 1.1 (PWD)
-\FP@margin=\skip43
-)
 (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
 
@@ -455,23 +453,29 @@ Writing index file ld140082_diplomski_izvestaj.idx
 LaTeX Warning: Label `slika1:gsrd' multiply defined.
 
 
+LaTeX Warning: Label `slika1:de1' multiply defined.
+
+
+LaTeX Warning: Label `slika1:de1' multiply defined.
+
+
 LaTeX Warning: Label `slika:q3' multiply defined.
 
 )
 \openout1 = `ld140082_diplomski_izvestaj.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -581,60 +585,159 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \openout4 = `ld140082_diplomski_izvestaj.toc'.
 
  [2] (./uvod.tex
-Overfull \hbox (3.549pt too wide) in paragraph at lines 7--8
-\OT1/cmr/m/n/12 pos-tu-pak pro-jek-to-vanja na-men-skih sis-tema. Uz to se ost-
-varuje ve^^Sca in-te-gracija, manja potro^^Tsnja,
+Overfull \hbox (4.1189pt too wide) in paragraph at lines 5--6
+[]\OT1/cmr/m/n/12 Sa sve ve^^Scim mogu^^Scnostima na-men-skih si-stema do^^Tslo
+ je do po-pu-la-ri-za-cije si-stema na ^^Tcipovima
  []
 
-
-Overfull \hbox (156.99898pt too wide) in paragraph at lines 19--23
-[]\OT1/cmtt/m/n/12 https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=
-English&CategoryNo=205&No=836&PartNo=4  \OT1/cmr/m/n/12 DE1-
- []
-
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 24.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 22.
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 24.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 22.
  [3] [4]
 <img/gsrd-boot.png, id=22, 240.9pt x 28.4262pt>
 File: img/gsrd-boot.png Graphic file (type png)
  <use img/gsrd-boot.png>
-Package pdftex.def Info: img/gsrd-boot.png used on input line 66.
+Package pdftex.def Info: img/gsrd-boot.png used on input line 64.
 (pdftex.def)             Requested size: 240.8994pt x 28.4261pt.
 
 <img/gsrd-flow.png, id=24, 366.168pt x 318.4698pt>
 File: img/gsrd-flow.png Graphic file (type png)
  <use img/gsrd-flow.png>
-Package pdftex.def Info: img/gsrd-flow.png used on input line 93.
+Package pdftex.def Info: img/gsrd-flow.png used on input line 91.
 (pdftex.def)             Requested size: 476.01834pt x 414.01068pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[5 <./img/gsrd-boot.png>] [6 <./img/gsrd-flow.png>] [7]
-<img/quartus3.png, id=37, 529.22719pt x 289.08pt>
+[5 <./img/gsrd-boot.png>] [6 <./img/gsrd-flow.png>]
+<img/quartus3.png, id=33, 529.22719pt x 289.08pt>
 File: img/quartus3.png Graphic file (type png)
  <use img/quartus3.png>
-Package pdftex.def Info: img/quartus3.png used on input line 120.
+Package pdftex.def Info: img/quartus3.png used on input line 118.
 (pdftex.def)             Requested size: 476.30006pt x 260.16959pt.
 
-Overfull \hbox (3.52919pt too wide) in paragraph at lines 125--125
-[]\OT1/cmr/bx/n/14.4 Memorijski mapi-ran in-ter-fejs ka LE dio-dama i tas-ter-i
-ma u FPGA 
+Overfull \hbox (3.52919pt too wide) in paragraph at lines 123--123
+[]\OT1/cmr/bx/n/14.4 Memorijski ma-pi-ran in-ter-fejs ka LE di-o-dama i ta-ste-
+rima u FPGA 
  []
 
-[8 <./img/quartus3.png>] [9] [10]
-Overfull \hbox (8.93166pt too wide) in paragraph at lines 200--201
-\OT1/cmr/m/n/12 uklju^^Tcivanja dra-jver iz bi-na-rnog opisa harvdera (\OT1/cmr
-/m/it/12 De-vice Tree Blob\OT1/cmr/m/n/12 ) u^^Tcitava in-for-ma-cije o harvder
-u.
+[7 <./img/quartus3.png>] [8] [9]
+Overfull \hbox (144.17387pt too wide) in paragraph at lines 195--196
+\OT1/cmr/m/it/12 bin-dings \OT1/cmr/m/n/12 delu u Li-nuks do-ku-men-ta-ciji[htt
+ps://github.com/torvalds/linux/tree/master/Documentation/devicetree/bindings]
  []
 
-) [11] (./uputstvo.tex
-<img/DE1SoC_SystemBuilder.png, id=50, 602.25pt x 411.03563pt>
+[10] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+) [11]
+Overfull \hbox (20.40964pt too wide) in paragraph at lines 284--285
+[]\OT1/cmr/m/n/12 Kada je \OT1/cmr/m/it/12 De-vice Tree So-urce \OT1/cmr/m/n/12
+ na-pi-san po-trebno je sme-stiti \OT1/cmtt/m/n/12 .dts \OT1/cmr/m/n/12 fajl u 
+fol-der \OT1/cmtt/m/n/12 arch/arm/boot/dts/\OT1/cmr/m/n/12 .
+ []
+
+[12]
+
+LaTeX Warning: Reference `slika1:linux1' on page 13 undefined on input line 291
+.
+
+<img/linux1.png, id=54, 478.03593pt x 395.97937pt>
+File: img/linux1.png Graphic file (type png)
+ <use img/linux1.png>
+Package pdftex.def Info: img/linux1.png used on input line 294.
+(pdftex.def)             Requested size: 239.01738pt x 197.9892pt.
+
+Overfull \hbox (13.46695pt too wide) in paragraph at lines 302--303
+\OT1/cmr/m/n/12 nije Al-tera []https://github.com/altera-opensource/linux-socfp
+ga. Ver-zije ker-nela koje obezbe[]duju
+ []
+
+
+Overfull \hbox (34.39752pt too wide) in paragraph at lines 304--305
+\OT1/cmr/m/n/12 o-nog fajla za Al-te-rine si-steme na ^^Tcipu. Kon-fi-gu-ra-cij
+a se izvr^^Tsava ko-man-dom \OT1/cmtt/m/n/12 make socfpga[]defconfig\OT1/cmr/m/
+n/12 .
+ []
+
+
+Overfull \hbox (1.27989pt too wide) in paragraph at lines 304--305
+\OT1/cmr/m/n/12 Na-kon toga se po-kre^^Sce kom-paj-li-ra-nje ker-nela ko-man-do
+m \OT1/cmtt/m/n/12 make zImage\OT1/cmr/m/n/12 . U fol-der \OT1/cmtt/m/n/12 arch
+/arm/boot
+ []
+
+[13 <./img/linux1.png>] [14] [15]
+Overfull \hbox (25.67929pt too wide) in paragraph at lines 373--374
+[]\OT1/cmr/m/n/12 Stvoreni faj-lovi se po-ja-vljuju u fol-deri koji je se na-la
+zi u \OT1/cmtt/m/n/12 /sys/bus/platform/driver/lddipldrv\OT1/cmr/m/n/12 .
+ []
+
+[16]
+
+LaTeX Warning: Reference `slika1:linux1' on page 17 undefined on input line 402
+.
+
+<img/de1.png, id=68, 1235.36531pt x 523.9575pt>
+File: img/de1.png Graphic file (type png)
+ <use img/de1.png>
+Package pdftex.def Info: img/de1.png used on input line 405.
+(pdftex.def)             Requested size: 494.13737pt x 209.57928pt.
+
+Overfull \hbox (10.4405pt too wide) in paragraph at lines 405--406
+ [][] 
+ []
+
+
+LaTeX Warning: Reference `slika1:test1' on page 17 undefined on input line 412.
+
+
+
+LaTeX Warning: Reference `slika1:test2' on page 17 undefined on input line 412.
+
+
+
+LaTeX Warning: Reference `slika1:linux1' on page 17 undefined on input line 413
+.
+
+<img/test1.png, id=69, 725.71124pt x 254.9525pt>
+File: img/test1.png Graphic file (type png)
+ <use img/test1.png>
+Package pdftex.def Info: img/test1.png used on input line 416.
+(pdftex.def)             Requested size: 362.85474pt x 127.47592pt.
+
+<img/test2.png, id=70, 4175.6pt x 3131.7pt>
+File: img/test2.png Graphic file (type png)
+ <use img/test2.png>
+Package pdftex.def Info: img/test2.png used on input line 422.
+(pdftex.def)             Requested size: 417.58447pt x 313.18834pt.
+
+<img/test3.png, id=71, 733.74126pt x 256.96pt>
+File: img/test3.png Graphic file (type png)
+ <use img/test3.png>
+Package pdftex.def Info: img/test3.png used on input line 429.
+(pdftex.def)             Requested size: 366.86974pt x 128.47968pt.
+)
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[17 <./img/de1.png>] (./zakljucak.tex)
+Overfull \vbox (3.29138pt too high) has occurred while \output is active []
+
+
+[18 <./img/test1.png> <./img/test2.png> <./img/test3.png>] [19] (./uputstvo.tex
+<img/DE1SoC_SystemBuilder.png, id=85, 602.25pt x 411.03563pt>
 File: img/DE1SoC_SystemBuilder.png Graphic file (type png)
 
 <use img/DE1SoC_SystemBuilder.png>
@@ -642,31 +745,31 @@ Package pdftex.def Info: img/DE1SoC_SystemBuilder.png used on input line 11.
 (pdftex.def)             Requested size: 361.35278pt x 246.62328pt.
 
 Overfull \hbox (26.23547pt too wide) in paragraph at lines 18--19
-[]\OT1/cmr/m/n/12 Otvoriti pro-jekat ko-man-dom \OT1/cmtt/m/n/12 File > Open Pr
-oject... \OT1/cmr/m/n/12 i iz-abrati \OT1/cmtt/m/n/12 ~/ld[]dipl/hw/ld[]dipl.qp
-f 
+[]\OT1/cmr/m/n/12 Otvoriti pro-je-kat ko-man-dom \OT1/cmtt/m/n/12 File > Open P
+roject... \OT1/cmr/m/n/12 i iza-brati \OT1/cmtt/m/n/12 ~/ld[]dipl/hw/ld[]dipl.q
+pf 
+ []
+
+
+Overfull \hbox (35.21024pt too wide) in paragraph at lines 19--20
+\OT1/cmr/m/n/12 tek-sta \OT1/cmtt/m/n/12 SDC files to include in the project \O
+T1/cmr/m/n/12 kli-kom na dugme '...' iza-brati fajl \OT1/cmtt/m/n/12 ld[]dipl.s
+dc 
  []
 
 
 Overfull \hbox (22.5492pt too wide) in paragraph at lines 21--22
-[]\OT1/cmr/m/n/12 Iz pro-zora \OT1/cmtt/m/n/12 IP Catalog \OT1/cmr/m/n/12 iz-ab
+[]\OT1/cmr/m/n/12 Iz pro-zora \OT1/cmtt/m/n/12 IP Catalog \OT1/cmr/m/n/12 iza-b
 rati \OT1/cmtt/m/n/12 Processors and Peripherials > Hard Processor Systems
  []
 
 
 Overfull \hbox (0.9464pt too wide) in paragraph at lines 24--25
-[]\OT1/cmr/m/n/12 U op^^Tstim pode^^Tsavanjima isklju^^Tciti op-ciju \OT1/cmtt/
-m/n/12 Enable MPU standby and event signals 
+[]\OT1/cmr/m/n/12 U op^^Tstim pode^^Tsavanjima is-klju^^Tciti op-ciju \OT1/cmtt
+/m/n/12 Enable MPU standby and event signals 
  []
 
-
-Overfull \hbox (15.77145pt too wide) in paragraph at lines 26--27
-[]\OT1/cmr/m/n/12 U pode^^Tsavanjima \OT1/cmtt/m/n/12 FPGA-to-HPS SDRAM Interfa
-ce \OT1/cmr/m/n/12 iz-abrati \OT1/cmtt/m/n/12 f2h[]sdram0 \OT1/cmr/m/n/12 i za-
-tim isklju^^Tciti
- []
-
-[12 <./img/DE1SoC_SystemBuilder.png>]
+[20 <./img/DE1SoC_SystemBuilder.png>]
 LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 132
 .
 LaTeX Font Info:    No file OMScmtt.fd. on input line 132.
@@ -676,13 +779,13 @@ LaTeX Font Warning: Font shape `OMS/cmtt/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
 (Font)              for symbol `textbullet' on input line 132.
 
-[13]
+[21]
 Overfull \hbox (14.84967pt too wide) in paragraph at lines 132--132
 []\OT1/cmtt/m/n/12 Average delay difference between address and command and CK:
  0.01
  []
 
-[14] <img/quartus1.png, id=61, 526.96875pt x 155.83218pt>
+[22] <img/quartus1.png, id=95, 526.96875pt x 155.83218pt>
 File: img/quartus1.png Graphic file (type png)
 
 <use img/quartus1.png>
@@ -690,11 +793,11 @@ Package pdftex.def Info: img/quartus1.png used on input line 138.
 (pdftex.def)             Requested size: 474.26749pt x 140.24767pt.
 
 Overfull \hbox (1.4131pt too wide) in paragraph at lines 142--143
-[]\OT1/cmr/m/n/12 Iz pro-zora \OT1/cmtt/m/n/12 IP Catalog \OT1/cmr/m/n/12 iz-ab
+[]\OT1/cmr/m/n/12 Iz pro-zora \OT1/cmtt/m/n/12 IP Catalog \OT1/cmr/m/n/12 iza-b
 rati \OT1/cmtt/m/n/12 Processors and Peripherials > Peripherials > PIO
  []
 
-<img/quartus2.png, id=62, 526.96875pt x 216.05719pt>
+<img/quartus2.png, id=96, 526.96875pt x 216.05719pt>
 File: img/quartus2.png Graphic file (type png)
  <use img/quartus2.png>
 Package pdftex.def Info: img/quartus2.png used on input line 148.
@@ -706,7 +809,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 Overfull \hbox (6.93216pt too wide) in paragraph at lines 152--153
 []\OT1/cmr/m/n/12 Ponovo iz pro-zora \OT1/cmtt/m/n/12 IP Catalog \OT1/cmr/m/n/1
-2 iz-abrati \OT1/cmtt/m/n/12 Processors and Peripherials > Peripherials
+2 iza-brati \OT1/cmtt/m/n/12 Processors and Peripherials > Peripherials
  []
 
 
@@ -718,9 +821,9 @@ ciju \OT1/cmtt/m/n/12 Synchronously
 
 
 Overfull \hbox (30.83092pt too wide) in paragraph at lines 154--155
-\OT1/cmtt/m/n/12 capture, Edge Type \OT1/cmr/m/n/12 pode-siti na \OT1/cmtt/m/n/
-12 ANY\OT1/cmr/m/n/12 , i uklju^^Tciti \OT1/cmtt/m/n/12 bit-clearing for edge c
-apture register\OT1/cmr/m/n/12 . 
+\OT1/cmtt/m/n/12 capture, Edge Type \OT1/cmr/m/n/12 po-de-siti na \OT1/cmtt/m/n
+/12 ANY\OT1/cmr/m/n/12 , i uklju^^Tciti \OT1/cmtt/m/n/12 bit-clearing for edge 
+capture register\OT1/cmr/m/n/12 . 
  []
 
 File: img/quartus3.png Graphic file (type png)
@@ -731,28 +834,22 @@ Package pdftex.def Info: img/quartus3.png used on input line 160.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[15 <./img/quartus1.png>]
+[23 <./img/quartus1.png>]
 Overfull \hbox (5.01884pt too wide) in paragraph at lines 166--167
-\OT1/cmtt/m/n/12 HDL design files for synthesis: VHDL \OT1/cmr/m/n/12 i isklju^
-^Tciti op-ciju \OT1/cmtt/m/n/12 Crete block symbol file
+\OT1/cmtt/m/n/12 HDL design files for synthesis: VHDL \OT1/cmr/m/n/12 i is-klju
+^^Tciti op-ciju \OT1/cmtt/m/n/12 Crete block symbol file
  []
 
-[16 <./img/quartus2.png>]
+[24 <./img/quartus2.png>]
 Overfull \hbox (5.87457pt too wide) in paragraph at lines 168--169
 []\OT1/cmr/m/n/12 Izabrati \OT1/cmtt/m/n/12 File > New VHDL File \OT1/cmr/m/n/1
-2 i novi fajl naz-vati \OT1/cmtt/m/n/12 ld[]dipl.vhd\OT1/cmr/m/n/12 . Pod \OT1/
+2 i novi fajl na-zvati \OT1/cmtt/m/n/12 ld[]dipl.vhd\OT1/cmr/m/n/12 . Pod \OT1/
 cmtt/m/n/12 Project Navigator
- []
-
-
-Overfull \hbox (6.35448pt too wide) in paragraph at lines 169--170
-[]\OT1/cmr/m/n/12 U ovom fa-jlu je potrebno in-stan-ci-rati HPS kom-po-nentu iz
- \OT1/cmtt/m/n/12 Platform Designer\OT1/cmr/m/n/12 -a. Potrebno
  []
 
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 174.
-<img/tcl.png, id=69, 578.16pt x 577.15625pt>
+<img/tcl.png, id=103, 578.16pt x 577.15625pt>
 File: img/tcl.png Graphic file (type png)
  <use img/tcl.png>
 Package pdftex.def Info: img/tcl.png used on input line 175.
@@ -769,7 +866,7 @@ Overfull \hbox (23.87006pt too wide) in paragraph at lines 184--186
 x-gnueabihf.tar.xz 
  []
 
-[17 <./img/tcl.png>]
+[25 <./img/tcl.png>]
 Overfull \hbox (73.27008pt too wide) in paragraph at lines 186--188
 \OT1/cmtt/m/n/12 tar -xf arm-linux-gnueabihf/gcc-linaro-7.2.1-2017.11-x86[]64[]
 arm-linux-gnueabihf.tar.xz
@@ -780,7 +877,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 190--193
 
  []
 
-<img/bsp1.png, id=74, 622.325pt x 345.29pt>
+<img/bsp1.png, id=109, 622.325pt x 345.29pt>
 File: img/bsp1.png Graphic file (type png)
  <use img/bsp1.png>
 Package pdftex.def Info: img/bsp1.png used on input line 208.
@@ -791,8 +888,8 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 Overfull \hbox (10.55276pt too wide) in paragraph at lines 216--218
-[]\OT1/cmr/m/n/12 Kopirati kom-pa-jli-rani Preloader: \OT1/cmtt/m/n/12 cp ~/ld[
-]dipl/sw/preloader/preloader-mkpimage.bin
+[]\OT1/cmr/m/n/12 Kopirati kom-paj-li-rani Pre-lo-a-der: \OT1/cmtt/m/n/12 cp ~/
+ld[]dipl/sw/preloader/preloader-mkpimage.bin
  []
 
 
@@ -800,7 +897,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 216--218
 
  []
 
-[18] <img/uboot.png, id=78, 734.745pt x 466.74374pt>
+[26] <img/uboot.png, id=113, 734.745pt x 466.74374pt>
 File: img/uboot.png Graphic file (type png)
  <use img/uboot.png>
 Package pdftex.def Info: img/uboot.png used on input line 234.
@@ -811,30 +908,30 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 Overfull \hbox (6.31485pt too wide) in paragraph at lines 238--239
-[]\OT1/cmr/m/n/12 Iza^^Sci iz kon-fig-u-ra-cionog menija izborom op-cije \OT1/c
-mtt/m/n/12 exit \OT1/cmr/m/n/12 (stre-l-ica desno i za-tim \OT1/cmtt/m/n/12 ent
-er\OT1/cmr/m/n/12 ). Sa^^Tcuvati
+[]\OT1/cmr/m/n/12 Iza^^Sci iz kon-fi-gu-ra-ci-o-nog me-nija iz-bo-rom op-cije \
+OT1/cmtt/m/n/12 exit \OT1/cmr/m/n/12 (stre-lica de-sno i za-tim \OT1/cmtt/m/n/1
+2 enter\OT1/cmr/m/n/12 ). Sa^^Tcuvati
  []
 
-[19 <./img/bsp1.png>] <img/uboot1.png, id=85, 734.745pt x 466.74374pt>
+[27 <./img/bsp1.png>] <img/uboot1.png, id=119, 734.745pt x 466.74374pt>
 File: img/uboot1.png Graphic file (type png)
 
 <use img/uboot1.png>
 Package pdftex.def Info: img/uboot1.png used on input line 244.
 (pdftex.def)             Requested size: 434.82784pt x 234.8792pt.
- [20 <./img/uboot.png> <./img/uboot1.png>]
+ [28 <./img/uboot.png> <./img/uboot1.png>]
 Overfull \hbox (7.07405pt too wide) in paragraph at lines 255--257
 \OT1/cmtt/m/n/12 mkimage -A arm -O linux -T script -a 0 -e 0 -n Boot[]script -d
  u-boot.script
  []
 
 
-LaTeX Warning: Reference `slika:dts1' on page 21 undefined on input line 277.
+LaTeX Warning: Reference `slika:dts1' on page 29 undefined on input line 277.
 
 
-LaTeX Warning: Reference `slika:dts1' on page 21 undefined on input line 278.
+LaTeX Warning: Reference `slika:dts1' on page 29 undefined on input line 278.
 
-<img/dts1.png, id=94, 734.745pt x 466.74374pt>
+<img/dts1.png, id=128, 734.745pt x 466.74374pt>
 File: img/dts1.png Graphic file (type png)
  <use img/dts1.png>
 Package pdftex.def Info: img/dts1.png used on input line 281.
@@ -843,13 +940,13 @@ Package pdftex.def Info: img/dts1.png used on input line 281.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[21]
+[29]
 Overfull \hbox (40.57913pt too wide) in paragraph at lines 303--305
 []\OT1/cmr/m/n/12 Preuziti \OT1/cmtt/m/n/12 Buildroot git clone git://git.busyb
 ox.net/buildroot ~/ld[]dipl/sw/buildroot 
  []
 
-[22 <./img/dts1.png>]
+[30 <./img/dts1.png>]
 Overfull \hbox (23.87006pt too wide) in paragraph at lines 333--335
 \OT1/cmtt/m/n/12 cp ~/ld[]dipl/sw/buildroot/output/images/rootfs.tar ~/ld[]dipl
 /sdcard/rootfs.tar
@@ -871,20 +968,21 @@ Overfull \hbox (37.94907pt too wide) in paragraph at lines 364--366
 /sdx3 bs=64K seek=0 
  []
 
-[23] <img/minicom.png, id=107, 734.745pt x 439.6425pt>
+[31] <img/minicom.png, id=142, 734.745pt x 439.6425pt>
 File: img/minicom.png Graphic file (type png)
  <use img/minicom.png>
 Package pdftex.def Info: img/minicom.png used on input line 388.
 (pdftex.def)             Requested size: 434.82784pt x 218.61833pt.
 
-[24 <./img/minicom.png>]) [25] (./zakljucak.tex) (./dodatak.tex [26]
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2015/06/04 1.6 listings language file
-)
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
-) [27] [28]
-[29] [30] [31]) [32] (./ld140082_diplomski_izvestaj.aux)
+[32 <./img/minicom.png>]) (./dodatak.tex [33] [34] [35] [36] [37] [38] [39])
+(./literatura.tex
+Overfull \hbox (399.48833pt too wide) in paragraph at lines 3--4
+[]\OT1/cmr/m/n/12 DE1-SoC User Ma-nual(rev.E Bo-ard).pdf, Te-ra-sic, []\OT1/cmt
+t/m/n/12 https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&Ca
+tegoryNo=205&No=836&PartNo=4  
+ []
+
+) [40] (./ld140082_diplomski_izvestaj.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -896,13 +994,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 4971 strings out of 494910
- 67084 string characters out of 6179836
- 256294 words of memory out of 5000000
- 8166 multiletter control sequences out of 15000+600000
+ 5199 strings out of 493029
+ 69757 string characters out of 6136234
+ 267711 words of memory out of 5000000
+ 8630 multiletter control sequences out of 15000+600000
  9186 words of font info for 33 fonts, out of 8000000 for 9000
- 36 hyphenation exceptions out of 8191
- 38i,9n,51p,1648b,1718s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 1141 hyphenation exceptions out of 8191
+ 38i,9n,51p,1648b,1719s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texli
@@ -911,10 +1009,10 @@ f-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /public/amsfonts/cm/cmtt12.pfb>
-Output written on ld140082_diplomski_izvestaj.pdf (32 pages, 873119 bytes).
+Output written on ld140082_diplomski_izvestaj.pdf (40 pages, 15130499 bytes).
 PDF statistics:
- 169 PDF objects out of 1000 (max. 8388607)
- 101 compressed objects within 2 object streams
+ 204 PDF objects out of 1000 (max. 8388607)
+ 120 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 85 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 110 words of extra memory for PDF output out of 10000 (max. 10000000)
 
